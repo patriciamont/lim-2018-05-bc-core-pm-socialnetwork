@@ -1,6 +1,6 @@
-# EDURED
+# IDEAS
 
-> educadores que inspiran
+> educadores compartiendo inspiración
 
 ## Índice
 
@@ -15,103 +15,123 @@
 * **Implementación:** Proposición de como acceder a este proyecto y los requerimientos de instalación.
 
 ***
-Prueba nuestro demo aquí: https://debbievejarano.github.io/lim-2018-05-bc-core-am-socialnetwork/
+Prueba nuestro demo aquí: <colocar demo>
 
 
 ## Valores y metodología ágil
-![](https://fotos.subefotos.com/43cc21b3759d1d5f5c5848d74b3d61fdo.png)
+![Cultura de equipo](https://fotos.subefotos.com/43cc21b3759d1d5f5c5848d74b3d61fdo.png)
 
 ## UX design
 
+Revisa nuestro [informe completo de UX](https://docs.google.com/presentation/d/1hCN5ryDyvF5kQvmFy7EEwQj_liXk_Lu3uRkfPMDpUtw/edit?usp=sharing).
+
 ### **Etapas**
-![](https://fotos.subefotos.com/51c2e07276f2665a3d4c186730113f84o.png)
+
+![Fases UX](https://fotos.subefotos.com/51c2e07276f2665a3d4c186730113f84o.png)
 
 ### **Actividades**
 
 #### Definición del producto
 Aquí respondemos las interregantes de nuestro cliente:
-- ¿Cuáles son los elementos básicos que tiene una red social?
+* ¿Cuáles son los elementos básicos que tiene una red social?
 
-- ¿Quiénes son los principales usuarios de producto?
+    Un login para poder registrarse e iniciar sesión, un muro para que los usuario puedan postear contenido y la opción de buscar personas para poder seguirlas
 
-    _Educadores de los niveles inicial,  primaria y secundaria entre 25 y 45 años de edad que se encuentren laborando en las distintas regiones del país y cuenten con smarthphone y/o computadora._
+* ¿Quiénes son los principales usuarios de producto?
 
-- ¿Cómo descubriste las necesidades de los usuarios?
+    Educadores de los niveles inicial,  primaria y secundaria entre 25 y 45 años de edad que se encuentren laborando en las distintas regiones del país y cuenten con smarthphone y/o computadora.
 
-    _En primer lugar, identificamos el objetivo de nuestra investigación. Para ello, segmentamos a clientes potenciales mediante estadísticas y brainstorning. Ahí nos dimos con una gran sorpresa, había más de medio millón de docentes en nuestro país y ninguna aplicación móvil especializada que los conecte entre ellos._ 
+* ¿Cómo descubriste las necesidades de los usuarios?
 
-    _Luego, postulamos algunas hipótesis y con ello armamos una guía de entrevista en profundidad que aplicamos poco después. También nos apoyamos de encuestas para darle solidez, a nivel cuantitativo, y obtener datos concretos._
+    En primer lugar, identificamos el objetivo de nuestra investigación. Para ello, segmentamos a clientes potenciales mediante estadísticas y brainstorning. Ahí nos dimos con una gran sorpresa, había más de medio millón de docentes en nuestro país y ninguna aplicación móvil especializada que los conecte entre ellos.
 
-    _Finalmente, sintetizamos la   información como equipo en un user persona._
+    Luego, postulamos algunas hipótesis y con ello armamos una guía de entrevista en profundidad que aplicamos poco después. También nos apoyamos de encuestas para darle solidez, a nivel cuantitativo, y obtener datos concretos.
 
-- ¿Qué problema resuelve el producto para estos usuarios?
+    Finalmente, sintetizamos la   información como equipo en un user persona.
 
-    _Edured es una comunidad de educadores que facilita inspiración para la realización de sesiones de clase y trabajo en el aula._
+* ¿Qué problema resuelve el producto para estos usuarios?
 
-- ¿Cuáles son los objetivos de estos usuarios en relación con el producto?
+    Ideas es una comunidad de educadores que facilita inspiración para la realización de sesiones de clase y trabajo en el aula.
 
-    - _Encontrar inspiración para la elaboración de sus sesiones de clase._
+* ¿Cuáles son los objetivos de estos usuarios en relación con el producto?
 
-    - _Optimizar el tiempo que les toma preparar una sesión de clase._
+    - Encontrar inspiración para la elaboración de sus sesiones de clase.
 
-    - _Conocer la creatividad de otros docentes para replicarla en el aula._
+    - Optimizar el tiempo que les toma preparar una sesión de clase.
 
-    - _Encontrar fácilmente ideas de como abordar temas en específico._
+    - Conocer la creatividad de otros docentes para replicarla en el aula.
 
-    - _Enterarse de novedades en el sector educativo._
+    - Encontrar fácilmente ideas de como abordar temas en específico.
 
-- ¿Cuáles son las principales funcionalidades del producto y cuál es su prioridad?
+    - Enterarse de novedades en el sector educativo.
 
-    _La prioridad es poder compartir sesiones de clase como pdf o imágenes sin ningún tipo de problema._
+* ¿Cuáles son las principales funcionalidades del producto y cuál es su prioridad?
 
-    _Las funcionalidades son:_
+    La prioridad es poder compartir sesiones de clase como pdf o imágenes sin ningún tipo de problema.
 
-    - _Facilitar el registro de usuarios con una interfaz que sea entendible._
+    Las funcionalidades son:
 
-    - _Facilitar el intercambio y editado de ideas, posts, imágenes, etc entre los docentes registrados._
+    - Facilitar el registro de usuarios con una interfaz que sea entendible.
 
-    - _Que los usuarios que publiquen sus posts puedan sentir el apoyo a su idea con un like de otros docentes registrados y no registrados._
+    - Facilitar el intercambio y editado de ideas, posts, imágenes, etc entre los docentes registrados.
 
-    - _Que nuestros usuarios se puedan agregar como amigos y hacer de su red de colegas mucho más amplia._
+    - Que los usuarios que publiquen sus posts puedan sentir el apoyo a su idea con un like de otros docentes registrados y no registrados.
 
-- ¿Cómo verificaste que el producto les está resolviendo sus problemas?
+    - Que nuestros usuarios se puedan agregar como amigos y hacer de su red de colegas mucho más amplia.
 
-    _Siempre regresamos a revisar el user persona y además tuvimos que hacer uso de técnicas como user test y tree test._
+* ¿Cómo verificaste que el producto les está resolviendo sus problemas?
 
-- ¿Cómo te asegurarás que estos usuarios usen este producto?
+    Siempre regresamos a revisar el user persona y además tuvimos que hacer uso de técnicas como user test y tree test.
 
-    _En primer lugar, verificando la arquitectura de la información con la técnica de tree test y con encuestas esporádicas para conocer la opinión de mis usuarios. ¡Es importante el feedback constante del usuario final!_
+* ¿Cómo te asegurarás que estos usuarios usen este producto?
+
+    En primer lugar, verificando la arquitectura de la información con la técnica de tree test y con encuestas esporádicas para conocer la opinión de mis usuarios. ¡Es importante el feedback constante del usuario final!
 #### Benchmark
 En esta sección presentamos las principales redes sociales específicas y no específicas del mercado:
 
+![Benchmark](https://fotos.subefotos.com/5ca259da1a131e4728d6d8fe963ddf59o.png)
+Para mayores detalles visita nuestro [informe UX](https://docs.google.com/presentation/d/1hCN5ryDyvF5kQvmFy7EEwQj_liXk_Lu3uRkfPMDpUtw/edit?usp=sharing).
+
 #### Entrevistas con usuarios
 En esta sección presentamos el resumen de entrevistas con usuarios:
+![Resumen entrevistas](https://fotos.subefotos.com/ea38025bf6ddcb5633bd4a15f127690eo.jpg)
+Para mayores detalles visita nuestro [informe UX](https://docs.google.com/presentation/d/1hCN5ryDyvF5kQvmFy7EEwQj_liXk_Lu3uRkfPMDpUtw/edit?usp=sharing).
 
 #### Prototipos en alta fidelidad
 En esta sección presentamos el link y screenshots del prototipo en alta fidelidad. Las deciones de tipografía, color y otros se especificarán en el área de UI Design.
 
-![](https://fotos.subefotos.com/d4e6abc0ae734981f0698784a20b3e9ao.png)
 
-![](https://fotos.subefotos.com/047b2468c7036b62969e37f4903a9ed7o.png)
+![Imagen 1][1]  ![Imagen 2][2]
 
-A quí nuestro enlace al prototipo en figma: https://www.figma.com/file/MoNRfYoya6dnlccSS0KqcG1W/Untitled
+[1]:https://fotos.subefotos.com/bb3039ae83dc875d4dc986aa15df876eo.jpg
+[2]: https://fotos.subefotos.com/b0b6c4ec99402e0824ff9675e85b1aa1o.jpg
+
+![register](https://fotos.subefotos.com/86d15f589aa2f7fbce7797034ae1c574o.jpg)
+
+[Dale click a nuestro proyecto en Adobe XD](colocar link)
+
 #### Testing con prototipo
 En esta sección exponemos las conclusiones del testing del prototipo en alta fidelidad con usuarios:
+
+> En el login, entendieron de qué iba la aplicación. Sin embargo, a algunos usuarios no les quedo claro que haya dos opciones con la palabra ingresa y además que exista la opción de registrarse con la indicación "usuario". Eso les hacia considerar la opción de solo colocar su nombre. Por ende, decidimos reforzar la marca con un _tagline_, incluir solo una opción de ingresa y reemplazar la palagra "usuario" por "correo electrónico".
+
+
 
 #### Testing con producto HTML
 En esta sección exponemos las conclusiones del testing del prototipo en HTML con usuarios:
 
 ### **Técnicas**
+
 Para la búsqueda de información
+
 - Brainstorning
 - Benchmark
 
 Para el descubrimiento del perfil y necesidades del usuario
 - Entrevistas en profundidad
-- Cuestionarios
 
 Para la arquitectura de la información
-- Tree test
+- Card Sorting
 
 Para el diseño de interacción:
 - flowchart (Diagramas de flujo)
@@ -124,15 +144,44 @@ Para el test del diseño:
 - user test (Prueba con usuario)
 
 ### **Herramientas**
-Para el diseño y aplicación de cuestionarios:
-- Google forms
 
 Para el prototipado en alta fidelidad:
 
-- Figma
+- Adobe XD
+
+Para la arquitectura de la información
+- CmapTools
+
+Para maquetación y diseño
+- Adobde Illustrator
 
 ## UI design
 
+Ingresa a nuestra [presentación de marca](https://docs.google.com/presentation/d/1vvUODYYqm4Pi5AlR3HOqQpAEha5wZLQZ_T30uIL4oLI/edit?usp=sharing).
+
 ## Front end
+Decidimos trabajar en vanilla javascript porque la curva de aprendizaje para usar frameworks como Angular o Vue nos iban a demandar más tiempo, con el que no contabamos.
+
+Estructuramos un boilerplate contemplando una carpeta para tests y otra para el desarrollo del proyecto en sí.
 
 ## Implementación
+#### Ejecutar la aplicación localmente
+Necesitas instalar:
+* Git Bash
+Luego, debes *clonar* este repositorio en tu equipo
+```bash
+git clone https://github.com/Leydy/lim-2018-05-bc-core-pm-socialnetwork.git
+```
+
+#### Instala dependencias
+Necesitas instalar
+* Node.js®
+
+Luego, ejecuta el comando npm install
+```
+npm install
+```
+
+Finalmente, este proyecto esta provisto de tests que puedes ejecutar con el siguiente comando
+```
+npm test
