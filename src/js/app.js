@@ -14,7 +14,7 @@ const post = document.getElementById('post');
 const posts = document.getElementById('posts');
 
 
-window.onload = () => {
+/* window.onload = () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       console.log('User is signed in.');
@@ -36,21 +36,15 @@ window.onload = () => {
 }
 
 
-function writeUserData(userId, name, email, imageUrl) {
+ function writeUserData(userId, name, email, imageUrl) {
   firebase.database().ref('users/' + userId).set({
     username: name,
     email: email,
     profile_picture: imageUrl
   });
-}
+} 
 
 
-function writeNewPost(uid, body) {
-  // A post entry.
-  var postData = {
-    uid: uid,
-    body: body,
-  };
 
   // Get a key for a new Post.
   var newPostKey = firebase.database().ref().child('posts').push().key;
@@ -61,8 +55,9 @@ function writeNewPost(uid, body) {
   updates['/user-posts/' + uid + '/' + newPostKey] = postData;
 
   firebase.database().ref().update(updates);
-  return newPostKey;
-}
+  return newPostKey
+} */
+
 
 btnSave.addEventListener('click', () => {
   var userId = firebase.auth().currentUser.uid;
