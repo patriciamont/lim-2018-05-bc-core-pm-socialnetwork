@@ -1,10 +1,10 @@
-var config = {
-    apiKey: "AIzaSyDWoLKlT3JMv0j6X9bd1-Ka63qi5fJlisg",
-    authDomain: "educate-b855e.firebaseapp.com",
-    databaseURL: "https://educate-b855e.firebaseio.com",
-    projectId: "educate-b855e",
-    storageBucket: "",
-    messagingSenderId: "56828917640"
-};
-
-firebase.initializeApp(config);
+// Initialize Firebase
+  let config = {
+    apiKey: "AIzaSyCxl3T5173K2sblbrIjahBtNWGJ_fkWpck",
+    authDomain: "mi-proyecto-red.firebaseapp.com",
+    databaseURL: "https://mi-proyecto-red.firebaseio.com",
+    projectId: "mi-proyecto-red",
+    storageBucket: "mi-proyecto-red.appspot.com",
+    messagingSenderId: "327837950688"
+  };
+  firebase.initializeApp(config);
