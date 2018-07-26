@@ -10,7 +10,7 @@ const password = document.getElementById('password')
 
 btnRegister.addEventListener('click', (event) => {
     event.preventDefault()
-    register(email.value,password.value)
+    register(email.value,password.value,passwordConfirm.value)
 })
 
 btnFacebook.addEventListener('click',()=>{

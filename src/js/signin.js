@@ -9,9 +9,8 @@ const btnGoogle = document.getElementById('btnGoogle')
 
 
 btnSignin.addEventListener('click',()=>{
-    email2 =email.value
-    password2 = password.value
-    signIn(email2,password2)
+    event.preventDefault()
+    signIn(email.value,password.value)
 })
 
 btnFacebook.addEventListener('click',()=>{
