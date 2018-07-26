@@ -4,6 +4,7 @@
 window.register = (email,password)=>{
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(function () {
+        window.location.href="profile.html"
         console.log('se creó un usuario')
     })
     .catch(function (error) {
@@ -16,6 +17,7 @@ window.register = (email,password)=>{
 window.signIn = (email,password)=>{
     firebase.auth().signInWithEmailAndPassword(email.value, password.value)
     .then(function () {
+        window.location.href="profile.html"
         console.log('usuario registrado inició sesión')
     })
     .catch(function (error) {
@@ -38,9 +40,11 @@ window.signGoogle=()=>{
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
         .then(function (result) {
+            window.location.href="profile.html"
             console.log('Sesión con google');
             var user = result.user;
-            writeUserData(user.uid, user.name, user.email, user.imageUrl) /*{
+            // writeUserData(user.uid, user.name, user.email, user.imageUrl)
+             /*{
             firebase.database().ref('users/' + userId).set({
              username: name,
               email: email,
@@ -60,7 +64,7 @@ window.signGoogle=()=>{
             // ...
         });
 }
-
+    
 //FUNCIÓN loguease con facebook
 window.signFacebook=()=>{
     var provider = new firebase.auth.FacebookAuthProvider();
@@ -71,7 +75,9 @@ window.signFacebook=()=>{
     });
     console.log('Usuario ingreso con FB');
     firebase.auth().signInWithPopup(provider)
-        .then(function (result) { console.log('Logueado con Fb'); })
+        .then(function (result) { 
+            window.location.href="profile.html"
+console.log('Logueado con Fb'); })
         .catch(function (error) {
             // Handle Errors here.
             console.log(error.code);
@@ -83,4 +89,3 @@ window.signFacebook=()=>{
             // ...
         });
 }
-
