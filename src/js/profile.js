@@ -1,4 +1,4 @@
-//
+//********ESTE DOCUMENTO MANIPULA AL profile.html********//
 
 const login = document.getElementById('login');
 const logout = document.getElementById('logout');

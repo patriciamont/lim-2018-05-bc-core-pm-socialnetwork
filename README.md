@@ -103,10 +103,10 @@ En esta sección presentamos el link y screenshots del prototipo en alta fidelid
 
 ![Imagen 1][1]  ![Imagen 2][2]
 
-[1]:https://fotos.subefotos.com/bb3039ae83dc875d4dc986aa15df876eo.jpg
-[2]: https://fotos.subefotos.com/b0b6c4ec99402e0824ff9675e85b1aa1o.jpg
+[1]:https://fotos.subefotos.com/a8fe3f6dcb52f17ba988ecdae84afc0co.jpg
+[2]: https://fotos.subefotos.com/a8fe3f6dcb52f17ba988ecdae84afc0co.jpg
 
-![register](https://fotos.subefotos.com/86d15f589aa2f7fbce7797034ae1c574o.jpg)
+![register](https://fotos.subefotos.com/30e2e93084e5a2f6fb079ed25aac7de3o.jpg)
 
 [Dale click a nuestro proyecto en Adobe XD](colocar link)
 

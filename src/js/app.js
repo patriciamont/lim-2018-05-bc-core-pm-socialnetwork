@@ -1,22 +1,27 @@
 //*********AQUÍ SE ALMANECERAN LAS FUNCIONES GENERALES *********/
 
 //FUNCIÓN registro con email y password
-window.register = (email, password) => {
+window.register = (email,password,other) => {
+    if(password===other){
     firebase.auth().createUserWithEmailAndPassword(email, password)
-
-        .then(function () {
-            //window.location="profile.html"
-            console.log('se creó un usuario')
-        })
-        .catch(function (error) {
-            console.log(error.code, error.message)
-        });
+    .then(function () {
+        console.log('se creó un usuario')
+        window.location.href="profile.html" 
+    })
+    .catch(function (error) {
+        console.log('no se creo')
+        console.log(error.code, error.message)
+    });
+} else {
+    alert('no es la misma contraseña')
+}
 }
 
 
 //FUNCIÓN ingresar con usuario y contraseña creado
 window.signIn = (email, password) => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
+  
+        firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function () {
             window.location = "profile.html"
             console.log('usuario registrado inició sesión')
@@ -24,6 +29,8 @@ window.signIn = (email, password) => {
         .catch(function (error) {
             console.log(error.code, error.message)
         })
+   
+
 }
 
 //FUNCIÓN que llama a los datos de google
