@@ -22,5 +22,8 @@
     "nyc": "^11.7.1",
     "opener": "^1.4.3",
     "popper.js": "^1.14.3"
+  },
+  "devDependencies": {
+    "firebase-mock": "^2.2.4"
   }
 }
