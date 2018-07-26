@@ -1,3 +1,5 @@
+//*********AQUÍ SE ALMANECERAN LAS FUNCIONES DE profile.index *********/
+
 const login = document.getElementById('login');
 const logout = document.getElementById('logout');
 const user_name = document.getElementById('user_name');
