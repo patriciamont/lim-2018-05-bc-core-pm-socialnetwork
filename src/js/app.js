@@ -77,8 +77,10 @@ window.signFacebook=()=>{
     console.log('Usuario ingreso con FB');
     firebase.auth().signInWithPopup(provider)
         .then(function (result) { 
-            window.location.href="profile.html"
-console.log('Logueado con Fb'); })
+            console.log('Logueado con Fb');
+            window.location='profile.html'; 
+        })
+        
         .catch(function (error) {
             // Handle Errors here.
             console.log(error.code);
