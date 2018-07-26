@@ -16,6 +16,7 @@ const post = document.getElementById('post');
 const posts = document.getElementById('posts');
 var userName=document.getElementById('user-name');
 var userImage=document.getElementById('user-pic');
+var emailUser=document.getElementById('emailUser');
 
 
 window.onload = () => {
@@ -26,9 +27,11 @@ window.onload = () => {
 
       var displayName = user.displayName;
       var userPhoto = user.photoURL;
+      var emailU=user.email;
 
       userName.textContent=displayName;
       userImage.style.backgroundImage
+      emailUser.textContent=emailU;
       /*       login.classList.add("hiden");
       bd.classList.remove("hiden");
       posts.classList.remove("hiden");
