@@ -1,13 +1,14 @@
 //*********AQUÍ SE ALMANECERAN LAS FUNCIONES GENERALES *********/
 
 //FUNCIÓN registro con email y password
-window.register = (email,password)=>{
+window.register = (email,password) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(function () {
-        /* window.location.href="profile.html" */
         console.log('se creó un usuario')
+        window.location.href="profile.html" 
     })
     .catch(function (error) {
+        console.log('no se creo')
         console.log(error.code, error.message)
     });
 }
