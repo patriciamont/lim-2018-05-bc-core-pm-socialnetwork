@@ -7,7 +7,6 @@ const btnSignin = document.getElementById('btnSignin')
 const btnFacebook = document.getElementById('btnFacebook')
 const btnGoogle = document.getElementById('btnGoogle')
 
-
 btnSignin.addEventListener('click',()=>{
     event.preventDefault()
     signIn(email.value,password.value)
@@ -20,16 +19,3 @@ btnFacebook.addEventListener('click',()=>{
 btnGoogle.addEventListener('click',()=>{
     signGoogle()
 })
-
-
-
-/* const btnSignin = document.getElementById("btnSignin");
-btnSignin.addEventListener('click', () => {
-    firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-        .then(function () {
-            console.log('Inició Sesión');
-        })
-        .catch(function (error) {
-            console.log('Contraseña incorrecta');
-        });
-}) */
