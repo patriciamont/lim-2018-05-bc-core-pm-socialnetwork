@@ -4,7 +4,7 @@
 const login = document.getElementById('login');
 const logout = document.getElementById('logout');
 const user_name = document.getElementById('user_name');
-const btnLogout = document.getElementById("btnLogout");
+const btnLogout = document.getElementById("btnlogout");
 const btnSignin = document.getElementById("btnSignin");
 const register = document.getElementById("register");
 const email = document.getElementById("email");
@@ -21,18 +21,18 @@ window.onload = () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       console.log('User is signed in.');
-      login.classList.add("hiden");
+/*       login.classList.add("hiden");
       bd.classList.remove("hiden");
       posts.classList.remove("hiden");
       logout.classList.remove("hiden");
-      user_name.innerHTML = `Bienvenida ${user.displayName}`;
+      user_name.innerHTML = `Bienvenida ${user.displayName}` */;
     } else {
-      
+      window.location.href="index.html"
       console.log('No esta logueado');
-      login.classList.remove("hiden");
+/*       login.classList.remove("hiden");
       logout.classList.add("hiden");
-      posts.classList.add("hiden");S
-      bd.classList.add("hiden")
+      posts.classList.add("hiden");
+      bd.classList.add("hiden") */
     }
   });
 
