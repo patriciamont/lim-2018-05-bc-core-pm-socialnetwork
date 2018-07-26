@@ -31,21 +31,21 @@ window.onload = () => {
       console.log('No esta logueado');
       login.classList.remove("hiden");
       logout.classList.add("hiden");
-      posts.classList.add("hiden");
+      posts.classList.add("hiden");S
       bd.classList.add("hiden")
     }
   });
 
 }
 
-
+/* 
 function writeUserData(userId, name, email, imageUrl) {
   firebase.database().ref('users/' + userId).set({
     username: name,
     email: email,
     profile_picture: imageUrl
   });
-}
+} */
 
 
 function writeNewPost(uid, body) {
