@@ -25,13 +25,13 @@ window.signIn = (email,password)=>{
 
 //FUNCIÓN que llama a los datos de google
 
-const writeUserData = (userId, name, email, imageUrl) => {
-    firebase.database().ref('users/' + userId).set({
-        username: name,
-        email: email,
-        profile_picture: imageUrl
-    });
-}
+// const writeUserData = (userId, name, email, imageUrl) => {
+//     firebase.database().ref('users/' + userId).set({
+//         username: name,
+//         email: email,
+//         profile_picture: imageUrl
+//     });
+// }
 
 //FUNCIÓN loguearse con google
 window.signGoogle=()=>{
@@ -40,13 +40,13 @@ window.signGoogle=()=>{
         .then(function (result) {
             console.log('Sesión con google');
             var user = result.user;
-            writeUserData(user.uid, user.name, user.email, user.imageUrl) /*{
-            firebase.database().ref('users/' + userId).set({
-             username: name,
-              email: email,
-              profile_picture : imageUrl
-            });
-        }*/
+        //     writeUserData(user.uid, user.name, user.email, user.imageUrl) /*{
+        //     firebase.database().ref('users/' + userId).set({
+        //      username: name,
+        //       email: email,
+        //       profile_picture : imageUrl
+        //     });
+        // }*/
 
         })
         .catch(function (error) {
