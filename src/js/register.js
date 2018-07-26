@@ -10,8 +10,6 @@ const password = document.getElementById('password')
 
 btnRegister.addEventListener('click', (event) => {
     event.preventDefault()
-
-    console.log(email.value, password)
     register(email.value,password.value)
 })
 

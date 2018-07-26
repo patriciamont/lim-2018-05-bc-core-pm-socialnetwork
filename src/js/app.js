@@ -15,15 +15,15 @@ window.register = (email,password) => {
 
 
 //FUNCIÓN ingresar con usuario y contraseña creado
-window.signIn = (email,password)=>{
-    firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-    .then(function () {
-        window.location.href="profile.html"
-        console.log('usuario registrado inició sesión')
-    })
-    .catch(function (error) {
-        console.log(error.code, error.message)
-    })
+window.signIn = (email, password) => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(function () {
+            window.location = "profile.html"
+            console.log('usuario registrado inició sesión')
+        })
+        .catch(function (error) {
+            console.log(error.code, error.message)
+        })
 }
 
 //FUNCIÓN que llama a los datos de google
@@ -37,22 +37,22 @@ window.signIn = (email,password)=>{
 } */
 
 //FUNCIÓN loguearse con google
-window.signGoogle=()=>{
+window.signGoogle = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
         .then(function (result) {
-            window.location.href="profile.html"
+            window.location.href = "profile.html"
             console.log('Sesión con google');
-            window.location='profile.html';
+            window.location = 'profile.html';
             var user = result.user;
-         /*    writeUserData(user.uid, user.name, user.email, user.imageUrl);
-             {
-            firebase.database().ref('users/' + userId).set({
-             username: name,
-              email: email,
-              profile_picture : imageUrl
-            });
-        } */
+            /*    writeUserData(user.uid, user.name, user.email, user.imageUrl);
+                {
+               firebase.database().ref('users/' + userId).set({
+                username: name,
+                 email: email,
+                 profile_picture : imageUrl
+               });
+           } */
 
         })
         .catch(function (error) {
@@ -66,22 +66,22 @@ window.signGoogle=()=>{
             // ...
         });
 }
-    
+
 //FUNCIÓN loguease con facebook
-window.signFacebook=()=>{
+window.signFacebook = () => {
     var provider = new firebase.auth.FacebookAuthProvider();
     provider.setCustomParameters({
-        
+
         'display': 'popup'
-        
+
     });
-    console.log('Usuario ingreso con FB');
+
     firebase.auth().signInWithPopup(provider)
-        .then(function (result) { 
+        .then(function (result) {
             console.log('Logueado con Fb');
-            window.location='profile.html'; 
+            window.location = "profile.html";
         })
-        
+
         .catch(function (error) {
             // Handle Errors here.
             console.log(error.code);
