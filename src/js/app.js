@@ -4,7 +4,7 @@
 window.register = (email,password)=>{
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(function () {
-        window.location.href="profile.html"
+        /* window.location.href="profile.html" */
         console.log('se creó un usuario')
     })
     .catch(function (error) {
