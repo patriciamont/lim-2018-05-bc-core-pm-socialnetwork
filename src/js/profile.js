@@ -2,7 +2,7 @@
 
 const login = document.getElementById('login');
 const logout = document.getElementById('logout');
-const user_name = document.getElementById('user_name');
+
 const btnLogout = document.getElementById("btnlogout");
 const btnSignin = document.getElementById("btnSignin");
 const register = document.getElementById("register");
@@ -14,13 +14,22 @@ const bd = document.getElementById('bd');
 const btnSave = document.getElementById('btnSave');
 const post = document.getElementById('post');
 const posts = document.getElementById('posts');
+var userName=document.getElementById('user-name');
+var userImage=document.getElementById('user-pic');
 
 
 window.onload = () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+      console.log(user);
       console.log('User is signed in.');
-/*       login.classList.add("hiden");
+
+      var displayName = user.displayName;
+      var userPhoto = user.photoURL;
+
+      userName.textContent=displayName;
+      userImage.style.backgroundImage
+      /*       login.classList.add("hiden");
       bd.classList.remove("hiden");
       posts.classList.remove("hiden");
       logout.classList.remove("hiden");
