@@ -1,6 +1,5 @@
 //********ESTE DOCUMENTO MANIPULA AL profile.html********//
 
-
 const login = document.getElementById('login');
 const logout = document.getElementById('logout');
 const user_name = document.getElementById('user_name');
@@ -73,30 +72,28 @@ btnSave.addEventListener('click', () => {
 
 
   var btnUpdate = document.createElement("input");
-  btnUpdate.setAttribute("value", "Update");
+  
+  btnUpdate.setAttribute("value", "Editar");
   btnUpdate.setAttribute("type", "button");
   var btnDelete = document.createElement("input");
-  btnDelete.setAttribute("value", "Delete");
+  btnDelete.setAttribute("value", "Eliminar");
   btnDelete.setAttribute("type", "button");
   var contPost = document.createElement('div');
-  var textPost = document.createElement('textarea')
+  var textPost = document.createElement("p")
   textPost.setAttribute("id", newPost);
+ 
+  const btnLike=document.createElement("a");
+  const showLikes=document.createElement('p');
+  showLikes.setAttribute('id', 'clicks');
+  textPost.innerHTML=post.value;
+  btnLike.textContent="Me gusta";
+  btnLike.setAttribute('data-like','0');
 
-  textPost.innerHTML = post.value;
 
-  btnDelete.addEventListener('click', () => {
-
-    firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
-    firebase.database().ref().child('posts/' + newPost).remove();
-
-    while (posts.firstChild) posts.removeChild(posts.firstChild);
-
-    alert('The user is deleted successfully!');
-    reload_page();
-
-  });
+  
 
   btnUpdate.addEventListener('click', () => {
+    textPost.setAttribute('contenteditable',true);
     const newUpdate = document.getElementById(newPost);
     const nuevoPost = {
       body: newUpdate.value,
@@ -111,12 +108,41 @@ btnSave.addEventListener('click', () => {
     firebase.database().ref().update(updatesUser);
     firebase.database().ref().update(updatesPost);
 
+  })
+
+  btnDelete.addEventListener('click', () => {
+
+    firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+    firebase.database().ref().child('posts/' + newPost).remove();
+
+    while (posts.firstChild) posts.removeChild(posts.firstChild);
+
+    alert('El usuario borró post!');
+    reload_page();
+
   });
+
+
+  btnLike.addEventListener('click',(e)=>{
+    e.preventDefault;
+
+    var currentStatus=e.target.getAttribute('data-like'); //0
+    if (currentStatus === '0') {
+      e.target.nextElementSibling.innerHTML = `${1} Te gusta`;
+      e.target.setAttribute('data-like', '1');
+  } else {
+      e.target.nextElementSibling.innerHTML = '';
+      e.target.setAttribute('data-like', '0');
+  }
+  })
 
   contPost.appendChild(textPost);
   contPost.appendChild(btnUpdate);
   contPost.appendChild(btnDelete);
+  contPost.appendChild(btnLike);
+  contPost.appendChild(showLikes);
   posts.appendChild(contPost);
+
 })
 
 
