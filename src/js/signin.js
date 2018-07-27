@@ -14,7 +14,7 @@ btnSignin.addEventListener('click', () => {
 
 btnFacebook.addEventListener('click', () => {
   const callback = result => {
-    /* location.href = 'profile.html' */
+    location.href = 'profile.html' 
     let user = result.user
     writeUserData(user.uid, user.displayName, user.email, user.photoURL)
     /* window.location = 'profile.html' */

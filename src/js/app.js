@@ -10,11 +10,11 @@ window.register = (email, password, other) => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(function() {
+      .then(function () {
         console.log('se creó un usuario')
         window.location.href = 'profile.html'
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log('no se creo')
         console.log(error.code, error.message)
       })
@@ -28,17 +28,16 @@ window.signIn = (email, password) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function() {
+    .then(function () {
       window.location = 'profile.html'
       console.log('usuario registrado inició sesión')
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error.code, error.message)
     })
 }
 
 //FUNCIÓN que guarda de datos generales del usuario
-
 const writeUserData = (userId, name, email, imageUrl) => {
   firebase
     .database()
@@ -56,14 +55,14 @@ window.signGoogle = () => {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function(result) {
+    .then(function (result) {
       window.location.href = 'profile.html'
       console.log('Sesión con google')
       var user = result.user
       console.log(user)
       writeUserData(user.uid, user.displayName, user.email, user.photoURL)
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // Handle Errors here.
       console.log(error.code)
       console.log(error.message)
@@ -85,11 +84,11 @@ window.signFacebook = (callback) => {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function(result) {
+    .then(function (result) {
       console.log('Logueado con Fb')
       callback(result)
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // Handle Errors here.
       console.log(error.code)
       console.log(error.message)
@@ -98,6 +97,21 @@ window.signFacebook = (callback) => {
       // The firebase.auth.AuthCredential type that was used.
       console.log(error.credential)
       // ...
+    })
+}
+
+//FUNCIÓN que cierra sesión
+window.logout = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log('Cerro Sesión')
+      window.location.href = 'index.html'
+
+    })
+    .catch((error) => {
+      console.log('Error al cerrar Sesión')
     })
 }
 

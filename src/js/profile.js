@@ -11,56 +11,58 @@ var userImage = document.getElementById('user-pic')
 var emailUser = document.getElementById('emailUser')
 
 
-
-
-
-
-
-
-window.onload = () => {
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      console.log(user)
-      console.log('User is signed in.')
-
-      var displayName = user.displayName
-      var userPhoto = user.photoURL
-      var emailU = user.email
-
-      userName.textContent = displayName
-      userImage.style.backgroundImage
-      emailUser.textContent = emailU
-      /*       login.classList.add("hiden");
-      bd.classList.remove("hiden");
-      posts.classList.remove("hiden");
-      logout.classList.remove("hiden");
-      user_name.innerHTML = `Bienvenida ${user.displayName}` */
-    } else {
-      window.location.href = 'index.html'
-      console.log('No esta logueado')
-      /*       login.classList.remove("hiden");
-      logout.classList.add("hiden");
-      posts.classList.add("hiden");
-      bd.classList.add("hiden") */
-    }
-  })
-}
-
-/* 
-function writeUserData(userId, name, email, imageUrl) {
-  firebase.database().ref('users/' + userId).set({
-    username: name,
-    email: email,
-    profile_picture: imageUrl
-  });
-} */
-
 function writeNewPost(uid, body) {
   // A post entry.
   var postData = {
     uid: uid,
     body: body
   }
+
+
+
+
+
+  window.onload = () => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        console.log(user)
+        console.log('El usuario está activo')
+
+        writeNewPost(uid, body)
+
+        var displayName = user.displayName
+        var userPhoto = user.photoURL
+        var emailU = user.email
+
+        userName.textContent = displayName
+        userImage.style.backgroundImage
+        emailUser.textContent = emailU
+        /*       login.classList.add("hiden");
+        bd.classList.remove("hiden");
+        posts.classList.remove("hiden");
+        logout.classList.remove("hiden");
+        user_name.innerHTML = `Bienvenida ${user.displayName}` */
+      } else {
+        window.location.href = 'index.html'
+        console.log('No esta logueado')
+        /*       login.classList.remove("hiden");
+        logout.classList.add("hiden");
+        posts.classList.add("hiden");
+        bd.classList.add("hiden") */
+      }
+    })
+  }
+
+  /* 
+  function writeUserData(userId, name, email, imageUrl) {
+    firebase.database().ref('users/' + userId).set({
+      username: name,
+      email: email,
+      profile_picture: imageUrl
+    });
+  } */
+
+
 
   // Get a key for a new Post.
   var newPostKey = firebase
@@ -166,15 +168,7 @@ btnSave.addEventListener('click', () => {
 })
 
 btnLogout.addEventListener('click', () => {
-  firebase
-    .auth()
-    .signOut()
-    .then(function() {
-      console.log('Cerro Sesión')
-    })
-    .catch(function(error) {
-      console.log('Error al cerrar Sesión')
-    })
+  logout()
 })
 
 function reload_page() {
