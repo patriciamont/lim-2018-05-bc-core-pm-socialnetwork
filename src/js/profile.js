@@ -20,7 +20,7 @@ function writeNewPost(uid, body) {
   window.onload = () => {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        
+
         console.log(user)
         console.log('El usuario está activo')
 
@@ -85,7 +85,7 @@ btnSave.addEventListener('click', () => {
 
 
   var btnUpdate = document.createElement("input");
-  btnUpdate.setAttribute("id",'Cod-'+newPost);
+  btnUpdate.setAttribute("id", 'Cod-' + newPost);
   btnUpdate.setAttribute("value", "Editar");
   btnUpdate.setAttribute("type", "button");
   var btnDelete = document.createElement("input");
@@ -94,18 +94,18 @@ btnSave.addEventListener('click', () => {
   var contPost = document.createElement('div');
   var textPost = document.createElement("textarea")
   textPost.setAttribute("id", newPost);
-  textPost.disabled=true;
- 
-  const btnLike=document.createElement("a");
-  const showLikes=document.createElement('p');
+  textPost.disabled = true;
+
+  const btnLike = document.createElement("a");
+  const showLikes = document.createElement('p');
   showLikes.setAttribute('id', 'clicks');
-  textPost.innerHTML=post.value;
-  btnLike.textContent="Me gusta";
-  btnLike.setAttribute('data-like','0');
+  textPost.innerHTML = post.value;
+  btnLike.textContent = "Me gusta";
+  btnLike.setAttribute('data-like', '0');
 
   btnUpdate.addEventListener('click', () => {
-    
-    textPost.disabled=false;
+
+    textPost.disabled = false;
     //textPost.setAttribute('contenteditable',true);
     const newUpdate = document.getElementById(newPost);
     const nuevoPost = {
@@ -114,7 +114,7 @@ btnSave.addEventListener('click', () => {
 
     var updatesUser = {}
     var updatesPost = {}
-    
+
     updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost
     updatesPost['/posts/' + newPost] = nuevoPost
 
@@ -128,7 +128,7 @@ btnSave.addEventListener('click', () => {
       .ref()
       .update(updatesPost)
   })
- 
+
   btnDelete.addEventListener('click', () => {
     firebase
       .database()
@@ -147,37 +147,36 @@ btnSave.addEventListener('click', () => {
     reload_page()
   })
 
-    firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
-    firebase.database().ref().child('posts/' + newPost).remove();
+  firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+  firebase.database().ref().child('posts/' + newPost).remove();
 
-    while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+  while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
 
-    /* alert('El usuario borró post!');
-    reload_page(); */
+  /* alert('El usuario borró post!');
+  reload_page(); */
 
-  });
+});
 
 
-  btnLike.addEventListener('click',(e)=>{
-    e.preventDefault;
+btnLike.addEventListener('click', (e) => {
+  e.preventDefault;
 
-    var currentStatus = e.target.getAttribute('data-like') //0
-    if (currentStatus === '0') {
-      e.target.nextElementSibling.innerHTML = `${1} Te gusta`
-      e.target.setAttribute('data-like', '1')
-    } else {
-      e.target.nextElementSibling.innerHTML = ''
-      e.target.setAttribute('data-like', '0')
-    }
-  })
+  var currentStatus = e.target.getAttribute('data-like') //0
+  if (currentStatus === '0') {
+    e.target.nextElementSibling.innerHTML = `${1} Te gusta`
+    e.target.setAttribute('data-like', '1')
+  } else {
+    e.target.nextElementSibling.innerHTML = ''
+    e.target.setAttribute('data-like', '0')
+  }
+})
 
-  contPost.appendChild(textPost)
-  contPost.appendChild(btnUpdate)
-  contPost.appendChild(btnDelete)
-  contPost.appendChild(btnLike)
-  contPost.appendChild(showLikes)
-  posts.appendChild(contPost)
-}) */
+contPost.appendChild(textPost)
+contPost.appendChild(btnUpdate)
+contPost.appendChild(btnDelete)
+contPost.appendChild(btnLike)
+contPost.appendChild(showLikes)
+posts.appendChild(contPost)
 
 btnLogout.addEventListener('click', () => {
   logout()
