@@ -10,7 +10,6 @@ var userName = document.getElementById('user-name')
 var userImage = document.getElementById('user-pic')
 var emailUser = document.getElementById('emailUser')
 
-
 function writeNewPost(uid, body) {
   // A post entry.
   var postData = {
@@ -18,13 +17,10 @@ function writeNewPost(uid, body) {
     body: body
   }
 
-
-
-
-
   window.onload = () => {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
+        
         console.log(user)
         console.log('El usuario está activo')
 
@@ -43,8 +39,8 @@ function writeNewPost(uid, body) {
         logout.classList.remove("hiden");
         user_name.innerHTML = `Bienvenida ${user.displayName}` */
       } else {
-        window.location.href = 'index.html'
         console.log('No esta logueado')
+        window.location.href = 'index.html'
         /*       login.classList.remove("hiden");
         logout.classList.add("hiden");
         posts.classList.add("hiden");
@@ -83,7 +79,7 @@ function writeNewPost(uid, body) {
   return newPostKey
 }
 
-btnSave.addEventListener('click', () => {
+/* btnSave.addEventListener('click', () => {
   var userId = firebase.auth().currentUser.uid
   const newPost = writeNewPost(userId, post.value)
 
@@ -127,7 +123,7 @@ btnSave.addEventListener('click', () => {
       .ref()
       .update(updatesPost)
   })
-
+ 
   btnDelete.addEventListener('click', () => {
     firebase
       .database()
@@ -165,7 +161,7 @@ btnSave.addEventListener('click', () => {
   contPost.appendChild(btnLike)
   contPost.appendChild(showLikes)
   posts.appendChild(contPost)
-})
+}) */
 
 btnLogout.addEventListener('click', () => {
   logout()
