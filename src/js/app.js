@@ -1,7 +1,6 @@
 //*********AQUÍ SE ALMANECERAN LAS FUNCIONES GENERALES *********/
 
-//APRENDIENDO a crear callbacks
-
+//FUNCIÓN que te conecta al perfil
 
 
 //FUNCIÓN registro con usuario y contraseña
@@ -10,11 +9,11 @@ window.register = (email, password, other) => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(function() {
+      .then(function () {
         console.log('se creó un usuario')
         window.location.href = 'profile.html'
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log('no se creo')
         console.log(error.code, error.message)
       })
@@ -28,17 +27,16 @@ window.signIn = (email, password) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function() {
-      window.location = 'profile.html'
+    .then(function () {
+      /* window.location = 'profile.html' */
       console.log('usuario registrado inició sesión')
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error.code, error.message)
     })
 }
 
 //FUNCIÓN que guarda de datos generales del usuario
-
 const writeUserData = (userId, name, email, imageUrl) => {
   firebase
     .database()
@@ -53,17 +51,20 @@ const writeUserData = (userId, name, email, imageUrl) => {
 //FUNCIÓN loguearse con google
 window.signGoogle = () => {
   var provider = new firebase.auth.GoogleAuthProvider()
+  provider.addScope('profile')
+  provider.addScope('email')
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function(result) {
-      window.location.href = 'profile.html'
+    .then(function (result) {
+
       console.log('Sesión con google')
       var user = result.user
-      console.log(user)
       writeUserData(user.uid, user.displayName, user.email, user.photoURL)
+      /* console.log(user) */
+      /*  window.location.href = 'profile.html' */
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // Handle Errors here.
       console.log(error.code)
       console.log(error.message)
@@ -78,18 +79,20 @@ window.signGoogle = () => {
 //FUNCIÓN loguease con facebook
 window.signFacebook = (callback) => {
   var provider = new firebase.auth.FacebookAuthProvider()
-  provider.setCustomParameters({
+
+/*   provider.setCustomParameters({
     display: 'popup'
-  })
+  }) */
+  provider.addScope('user_birthday')
 
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function(result) {
+    .then(function (result) {
       console.log('Logueado con Fb')
-      callback(result)
+      /*  callback(result) */
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // Handle Errors here.
       console.log(error.code)
       console.log(error.message)
@@ -98,6 +101,21 @@ window.signFacebook = (callback) => {
       // The firebase.auth.AuthCredential type that was used.
       console.log(error.credential)
       // ...
+    })
+}
+
+//FUNCIÓN que cierra sesión
+window.logout = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log('Cerro Sesión')
+      window.location.href = 'index.html'
+
+    })
+    .catch((error) => {
+      console.log('Error al cerrar Sesión')
     })
 }
 
