@@ -3,7 +3,7 @@
 //VARIABLES
 const btnLogout = document.getElementById('btnlogout')
 const bd = document.getElementById('bd')
-const btnSave = document.getElementById('btnSave')
+const btnToPost = document.getElementById('btnSave')
 const post = document.getElementById('post')
 const posts = document.getElementById('posts')
 var userName = document.getElementById('user-name')
@@ -79,10 +79,9 @@ function writeNewPost(uid, body) {
   return newPostKey
 }
 
-btnSave.addEventListener('click', () => {
+btnToPost.addEventListener('click', () => {
   var userId = firebase.auth().currentUser.uid;
   const newPost = writeNewPost(userId, post.value);
-
 
   var btnUpdate = document.createElement("input");
   btnUpdate.setAttribute("id", 'Cod-' + newPost);
@@ -140,17 +139,27 @@ btnSave.addEventListener('click', () => {
       .ref()
       .child('posts/' + newPost)
       .remove()
-
-    while (posts.firstChild) posts.removeChild(posts.firstChild)
+    
+      while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+      contPost.appendChild(textPost)
+      contPost.appendChild(btnUpdate)
+      contPost.appendChild(btnDelete)
+      contPost.appendChild(btnLike)
+      contPost.appendChild(showLikes)
+      posts.appendChild(contPost)
 
     alert('El usuario borró post!')
     reload_page()
   })
 
-  firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
-  firebase.database().ref().child('posts/' + newPost).remove();
+  btnLike.addEventListener('click', (e) => {
+    e.preventDefault;
+like()  
+  })
+  
+  
 
-  while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+
 
   /* alert('El usuario borró post!');
   reload_page(); */
@@ -158,25 +167,6 @@ btnSave.addEventListener('click', () => {
 });
 
 
-btnLike.addEventListener('click', (e) => {
-  e.preventDefault;
-
-  var currentStatus = e.target.getAttribute('data-like') //0
-  if (currentStatus === '0') {
-    e.target.nextElementSibling.innerHTML = `${1} Te gusta`
-    e.target.setAttribute('data-like', '1')
-  } else {
-    e.target.nextElementSibling.innerHTML = ''
-    e.target.setAttribute('data-like', '0')
-  }
-})
-
-contPost.appendChild(textPost)
-contPost.appendChild(btnUpdate)
-contPost.appendChild(btnDelete)
-contPost.appendChild(btnLike)
-contPost.appendChild(showLikes)
-posts.appendChild(contPost)
 
 btnLogout.addEventListener('click', () => {
   logout()
