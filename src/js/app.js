@@ -134,17 +134,19 @@ window.logout = () => {
 }
 
 //FUNCIÓN que crea nuevo post
-window.writeNewPost = (uid, body) => {
+/* window.writeNewPost = (uid, body) => {
   // A post entry.
   var postData = {
     uid: uid,
     body: body
   }
-}
+} */
 
 //FUNCIÓN para editar post
 
 //FUNCIÓN para elimar post
+
+
 
 //FUNCIÓN PARA mostrar post
 
