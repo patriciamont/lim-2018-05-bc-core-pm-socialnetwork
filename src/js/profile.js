@@ -3,16 +3,9 @@
 //VARIABLES
 //********ESTE DOCUMENTO MANIPULA AL profile.html********//
 
-const login = document.getElementById('login');
-const logout = document.getElementById('logout');
+
 
 const btnLogout = document.getElementById("btnlogout");
-const btnSignin = document.getElementById("btnSignin");
-const register = document.getElementById("register");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const btnGoogle = document.getElementById('btnGoogle');
-const btnFb = document.getElementById('btnFb');
 const bd = document.getElementById('bd');
 const btnToPost= document.getElementById('btnSave');
 const post = document.getElementById('post');
@@ -56,18 +49,11 @@ window.onload = () => {
       //userImage.setAttribute()
 
       emailUser.textContent=emailU;
-      /*       login.classList.add("hiden");
-      bd.classList.remove("hiden");
-      posts.classList.remove("hiden");
-      logout.classList.remove("hiden");
-      user_name.innerHTML = `Bienvenida ${user.displayName}` */;
+     
     } else {
       window.location.href="index.html"
       console.log('No esta logueado');
-/*       login.classList.remove("hiden");
-      logout.classList.add("hiden");
-      posts.classList.add("hiden");
-      bd.classList.add("hiden") */
+
     }
   });
 
