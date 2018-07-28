@@ -16,30 +16,16 @@ btnSignin.addEventListener('click', () => {
 
 btnFacebook.addEventListener('click', () => {
   const callback = result => {
-    location.href = 'profile.html' 
     let user = result.user
     writeUserData(user.uid, user.displayName, user.email, user.photoURL)
-    /* window.location = 'profile.html' */
   }
-  const facebook = signFacebook(callback)
+  signFacebook(callback)
 })
 
 btnGoogle.addEventListener('click', () => {
-  signGoogle()
+  const callback = result => {
+    let user = result.user
+    writeUserData(user.uid, user.displayName, user.email, user.photoURL)
+  }
+  signGoogle(callback)
 })
-
-const observador = () => {
-  firebase.auth().onAuthStateChanged(
-    (user) => {
-
-
-      if (user) {
-        window.location = 'profile.html'
-        console.log('redirijo')
-      } else {
-        console.log('No esta logueado')
-      }
-    }
-  )
-} 
-observador()
