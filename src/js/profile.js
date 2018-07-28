@@ -30,7 +30,9 @@ window.onload = () => {
       var emailU=user.email;
 
       userName.textContent=displayName;
-      userImage.style.backgroundImage
+      userImage=user.photoURL;
+      //userImage.setAttribute()
+
       emailUser.textContent=emailU;
       /*       login.classList.add("hiden");
       bd.classList.remove("hiden");
@@ -84,15 +86,16 @@ btnSave.addEventListener('click', () => {
 
 
   var btnUpdate = document.createElement("input");
-  
+  btnUpdate.setAttribute("id",'Cod-'+newPost);
   btnUpdate.setAttribute("value", "Editar");
   btnUpdate.setAttribute("type", "button");
   var btnDelete = document.createElement("input");
   btnDelete.setAttribute("value", "Eliminar");
   btnDelete.setAttribute("type", "button");
   var contPost = document.createElement('div');
-  var textPost = document.createElement("p")
+  var textPost = document.createElement("textarea")
   textPost.setAttribute("id", newPost);
+  textPost.disabled=true;
  
   const btnLike=document.createElement("a");
   const showLikes=document.createElement('p');
@@ -105,7 +108,9 @@ btnSave.addEventListener('click', () => {
   
 
   btnUpdate.addEventListener('click', () => {
-    textPost.setAttribute('contenteditable',true);
+    
+    textPost.disabled=false;
+    //textPost.setAttribute('contenteditable',true);
     const newUpdate = document.getElementById(newPost);
     const nuevoPost = {
       body: newUpdate.value,
@@ -119,6 +124,7 @@ btnSave.addEventListener('click', () => {
 
     firebase.database().ref().update(updatesUser);
     firebase.database().ref().update(updatesPost);
+    
 
   })
 
@@ -127,10 +133,10 @@ btnSave.addEventListener('click', () => {
     firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
     firebase.database().ref().child('posts/' + newPost).remove();
 
-    while (posts.firstChild) posts.removeChild(posts.firstChild);
+    while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
 
-    alert('El usuario borró post!');
-    reload_page();
+    /* alert('El usuario borró post!');
+    reload_page(); */
 
   });
 
