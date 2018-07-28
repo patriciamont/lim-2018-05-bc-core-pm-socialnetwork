@@ -79,40 +79,45 @@ function writeNewPost(uid, body) {
   return newPostKey
 }
 
-/* btnSave.addEventListener('click', () => {
-  var userId = firebase.auth().currentUser.uid
-  const newPost = writeNewPost(userId, post.value)
+btnSave.addEventListener('click', () => {
+  var userId = firebase.auth().currentUser.uid;
+  const newPost = writeNewPost(userId, post.value);
 
-  var btnUpdate = document.createElement('input')
 
-  btnUpdate.setAttribute('value', 'Editar')
-  btnUpdate.setAttribute('type', 'button')
-  var btnDelete = document.createElement('input')
-  btnDelete.setAttribute('value', 'Eliminar')
-  btnDelete.setAttribute('type', 'button')
-  var contPost = document.createElement('div')
-  var textPost = document.createElement('p')
-  textPost.setAttribute('id', newPost)
-
-  const btnLike = document.createElement('a')
-  const showLikes = document.createElement('p')
-  showLikes.setAttribute('id', 'clicks')
-  textPost.innerHTML = post.value
-  btnLike.textContent = 'Me gusta'
-  btnLike.setAttribute('data-like', '0')
+  var btnUpdate = document.createElement("input");
+  btnUpdate.setAttribute("id",'Cod-'+newPost);
+  btnUpdate.setAttribute("value", "Editar");
+  btnUpdate.setAttribute("type", "button");
+  var btnDelete = document.createElement("input");
+  btnDelete.setAttribute("value", "Eliminar");
+  btnDelete.setAttribute("type", "button");
+  var contPost = document.createElement('div');
+  var textPost = document.createElement("textarea")
+  textPost.setAttribute("id", newPost);
+  textPost.disabled=true;
+ 
+  const btnLike=document.createElement("a");
+  const showLikes=document.createElement('p');
+  showLikes.setAttribute('id', 'clicks');
+  textPost.innerHTML=post.value;
+  btnLike.textContent="Me gusta";
+  btnLike.setAttribute('data-like','0');
 
   btnUpdate.addEventListener('click', () => {
-    textPost.setAttribute('contenteditable', true)
-    const newUpdate = document.getElementById(newPost)
+    
+    textPost.disabled=false;
+    //textPost.setAttribute('contenteditable',true);
+    const newUpdate = document.getElementById(newPost);
     const nuevoPost = {
       body: newUpdate.value
     }
 
     var updatesUser = {}
     var updatesPost = {}
-
+    
     updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost
     updatesPost['/posts/' + newPost] = nuevoPost
+
 
     firebase
       .database()
@@ -142,8 +147,19 @@ function writeNewPost(uid, body) {
     reload_page()
   })
 
-  btnLike.addEventListener('click', e => {
-    e.preventDefault
+    firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+    firebase.database().ref().child('posts/' + newPost).remove();
+
+    while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+
+    /* alert('El usuario borró post!');
+    reload_page(); */
+
+  });
+
+
+  btnLike.addEventListener('click',(e)=>{
+    e.preventDefault;
 
     var currentStatus = e.target.getAttribute('data-like') //0
     if (currentStatus === '0') {
