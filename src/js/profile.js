@@ -204,6 +204,7 @@ btnLogout.addEventListener('click', () => {
     console.log(error.credential);
   });
 }); */
+
 function reload_page() {
   window.location.reload();
 }
