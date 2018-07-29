@@ -7,8 +7,8 @@ const btnSignin = document.getElementById('btnSignin')
 const btnFacebook = document.getElementById('btnFacebook')
 const btnGoogle = document.getElementById('btnGoogle')
 
-btnSignin.addEventListener('click', () => {
-  event.preventDefault()
+btnSignin.addEventListener('click', (event) => {
+  event.preventDefault(); // Prevenimos el refreso de pagina al darle al boton
   signIn(email.value, password.value)
 })
 

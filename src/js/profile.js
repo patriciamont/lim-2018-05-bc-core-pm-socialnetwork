@@ -1,182 +1,168 @@
 //********ESTE DOCUMENTO MANIPULA AL profile.html********//
 
 //VARIABLES
-const btnLogout = document.getElementById('btnlogout')
-const bd = document.getElementById('bd')
-const btnSave = document.getElementById('btnSave')
-const post = document.getElementById('post')
-const posts = document.getElementById('posts')
-var userName = document.getElementById('user-name')
-var userImage = document.getElementById('user-pic')
-var emailUser = document.getElementById('emailUser')
+const btnLogout = document.getElementById('btnlogout');
+const bd = document.getElementById('bd');
+const btnSave = document.getElementById('btnSave');
+const post = document.getElementById('post');
+const posts = document.getElementById('posts');
+var userName = document.getElementById('user-name');
+var userImage = document.getElementById('user-pic');
+var emailUser = document.getElementById('emailUser');
 
-
-
-
-
-
-
+//Esto lo voy a estar escribiendo mucho asi que mejor lo guardo en una variable
+var database = firebase.database();
 
 window.onload = () => {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log(user)
-      console.log('User is signed in.')
+      console.log(user);
+      console.log('User is signed in.');
 
-      var displayName = user.displayName
-      var userPhoto = user.photoURL
-      var emailU = user.email
+      var displayName = user.displayName;
+      var userPhoto = user.photoURL;
+      var emailU = user.email;
 
-      userName.textContent = displayName
-      userImage.style.backgroundImage
-      emailUser.textContent = emailU
-      /*       login.classList.add("hiden");
-      bd.classList.remove("hiden");
-      posts.classList.remove("hiden");
-      logout.classList.remove("hiden");
-      user_name.innerHTML = `Bienvenida ${user.displayName}` */
+      userName.textContent = displayName;
+      userImage.style.backgroundImage;
+      emailUser.textContent = emailU;
     } else {
-      window.location.href = 'index.html'
-      console.log('No esta logueado')
-      /*       login.classList.remove("hiden");
-      logout.classList.add("hiden");
-      posts.classList.add("hiden");
-      bd.classList.add("hiden") */
+      window.location.href = 'index.html';
+      console.log('No esta logueado');
     }
-  })
-}
-
-/* 
-function writeUserData(userId, name, email, imageUrl) {
-  firebase.database().ref('users/' + userId).set({
-    username: name,
-    email: email,
-    profile_picture: imageUrl
   });
-} */
+};
 
 function writeNewPost(uid, body) {
-  // A post entry.
+  const userId = firebase.auth().currentUser.uid;
+
+  //Escribimos en la base de datos pero esta vez los mensajes estaran separados
+  // por el id del usuario, podemos guardar mas datos si es que quisieramos
+  // por ejemplo a la hora que fue emitido el mensaje.
+  let messageId = database.ref('posts/' + userId).push({
+    mensaje: body,
+    likes: 0
+  }).key;
+
   var postData = {
     uid: uid,
     body: body
-  }
+  };
 
-  // Get a key for a new Post.
-  var newPostKey = firebase
-    .database()
-    .ref()
-    .child('posts')
-    .push().key
-
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  var updates = {}
-  updates['/posts/' + newPostKey] = postData
-  updates['/user-posts/' + uid + '/' + newPostKey] = postData
-
-  firebase
-    .database()
-    .ref()
-    .update(updates)
-  return newPostKey
+  return messageId;
 }
 
 btnSave.addEventListener('click', () => {
-  var userId = firebase.auth().currentUser.uid
-  const newPost = writeNewPost(userId, post.value)
+  //Obtenemos el ID
+  var userId = firebase.auth().currentUser.uid;
 
-  var btnUpdate = document.createElement('input')
+  /*
+  Ejecutamos la funciona que nos permite crear un post
+  Ella nos devuelve un ID unico con el cual identificaremos 
+  el post en la base de datos */
 
-  btnUpdate.setAttribute('value', 'Editar')
-  btnUpdate.setAttribute('type', 'button')
-  var btnDelete = document.createElement('input')
-  btnDelete.setAttribute('value', 'Eliminar')
-  btnDelete.setAttribute('type', 'button')
-  var contPost = document.createElement('div')
-  var textPost = document.createElement('p')
-  textPost.setAttribute('id', newPost)
+  const post_id = writeNewPost(userId, post.value);
 
-  const btnLike = document.createElement('a')
-  const showLikes = document.createElement('p')
-  showLikes.setAttribute('id', 'clicks')
-  textPost.innerHTML = post.value
-  btnLike.textContent = 'Me gusta'
-  btnLike.setAttribute('data-like', '0')
+  var btnUpdate = document.createElement('input');
+
+  btnUpdate.setAttribute('value', 'Editar');
+  btnUpdate.setAttribute('type', 'button');
+
+  /* Creamos un boton para eliminar el post */
+  var btnDelete = document.createElement('input');
+
+  /* Le damos algunos atributos al boton como el texto que tendra dentro
+  y el tipo de boton que es */
+  btnDelete.setAttribute('value', 'Eliminar');
+  btnDelete.setAttribute('type', 'button');
+
+  /* Creamos un div donde pondremos todo el contenido de nuestro post */
+  var contPost = document.createElement('div');
+  /* Creamos un div donde pondremos solo el texto del post */
+  var textPost = document.createElement('p');
+
+  /* Le damos el un ID (el mismo que obtuvimos al momento de crear el post)
+    al DIV principal, esto nos va ayudar para mas adelante al momentro de eliminar
+    tambien eliminar este DIV */
+  contPost.setAttribute('id', post_id);
+
+  const btnLike = document.createElement('a');
+  const showLikes = document.createElement('p');
+
+  showLikes.setAttribute('id', 'clicks');
+  textPost.innerHTML = post.value;
+  btnLike.textContent = 'Me gusta';
+  btnLike.setAttribute('data-like', '0');
 
   btnUpdate.addEventListener('click', () => {
-    textPost.setAttribute('contenteditable', true)
-    const newUpdate = document.getElementById(newPost)
+    textPost.setAttribute('contenteditable', true);
+    const newUpdate = document.getElementById(post_id);
     const nuevoPost = {
       body: newUpdate.value
-    }
+    };
 
-    var updatesUser = {}
-    var updatesPost = {}
+    var updatesUser = {};
+    var updatesPost = {};
 
-    updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost
-    updatesPost['/posts/' + newPost] = nuevoPost
+    updatesUser['/user-posts/' + userId + '/' + post_id] = nuevoPost;
+    updatesPost['/posts/' + post_id] = nuevoPost;
 
     firebase
       .database()
       .ref()
-      .update(updatesUser)
+      .update(updatesUser);
     firebase
       .database()
       .ref()
-      .update(updatesPost)
-  })
+      .update(updatesPost);
+  });
 
   btnDelete.addEventListener('click', () => {
-    firebase
-      .database()
+    database
       .ref()
-      .child('/user-posts/' + userId + '/' + newPost)
-      .remove()
-    firebase
-      .database()
-      .ref()
-      .child('posts/' + newPost)
-      .remove()
+      .child('posts/' + userId + '/' + post_id)
+      .remove();
 
-    while (posts.firstChild) posts.removeChild(posts.firstChild)
+    //Eliminamos el post segun el id del post
+    document.getElementById(post_id).remove();
 
-    alert('El usuario borró post!')
-    reload_page()
-  })
+    //Mensaje de Alerta cuando el usuario borra el post
+    alert('El usuario borró post!');
+  });
 
   btnLike.addEventListener('click', e => {
-    e.preventDefault
+    e.preventDefault;
 
-    var currentStatus = e.target.getAttribute('data-like') //0
+    var currentStatus = e.target.getAttribute('data-like'); //0
     if (currentStatus === '0') {
-      e.target.nextElementSibling.innerHTML = `${1} Te gusta`
-      e.target.setAttribute('data-like', '1')
+      e.target.nextElementSibling.innerHTML = `${1} Te gusta`;
+      e.target.setAttribute('data-like', '1');
     } else {
-      e.target.nextElementSibling.innerHTML = ''
-      e.target.setAttribute('data-like', '0')
+      e.target.nextElementSibling.innerHTML = '';
+      e.target.setAttribute('data-like', '0');
     }
-  })
+  });
 
-  contPost.appendChild(textPost)
-  contPost.appendChild(btnUpdate)
-  contPost.appendChild(btnDelete)
-  contPost.appendChild(btnLike)
-  contPost.appendChild(showLikes)
-  posts.appendChild(contPost)
-})
+  contPost.appendChild(textPost);
+  contPost.appendChild(btnUpdate);
+  contPost.appendChild(btnDelete);
+  contPost.appendChild(btnLike);
+  contPost.appendChild(showLikes);
+  posts.appendChild(contPost);
+});
 
 btnLogout.addEventListener('click', () => {
   firebase
     .auth()
     .signOut()
     .then(function() {
-      console.log('Cerro Sesión')
+      console.log('Cerro Sesión');
     })
     .catch(function(error) {
-      console.log('Error al cerrar Sesión')
-    })
-})
+      console.log('Error al cerrar Sesión');
+    });
+});
 
 function reload_page() {
-  window.location.reload()
+  window.location.reload();
 }
