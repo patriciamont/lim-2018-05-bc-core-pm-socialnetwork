@@ -2,11 +2,12 @@
 
 //VARIABLES
 
-const btnRegister = document.getElementById('register');
+/* const btnRegister = document.getElementById('register'); */
 const btnFacebook = document.getElementById('btnFacebook');
 const btnGoogle = document.getElementById('btnGoogle');
+const form = document.getElementById('form');
 
-btnRegister.addEventListener('click', event => {
+form.addEventListener('submit', event => {
   //Prevenimops que se refresque la pagina al darle click al boton
   event.preventDefault();
 
@@ -41,9 +42,10 @@ btnRegister.addEventListener('click', event => {
   };
 
   /* Ejecutamos la funciona register con esto agregamos al Authentication el correo
-  y la password, el parametro callback nos regresa un ID que usamos en la funcion 
+  y la password, el parametro callback nos regresa un ID que usamos en la funcion
   WriteUserdata dentro del callback */
   register(email, password, callback);
+
 });
 
 btnFacebook.addEventListener('click', () => {

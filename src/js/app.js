@@ -36,16 +36,16 @@ window.signIn = (email, password) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(function () {
-      window.location = 'profile.html'
-      console.log('usuario registrado inició sesión')
+      location.href = 'profile.html'
     })
     .catch(function (error) {
-      console.log(error.code, error.message)
+      alert('Correo o contraseña invalida')
     })
 }
 
 //FUNCIÓN que guarda de datos generales del usuario
 const writeUserData = (userId, name, email, imageUrl) => {
+
   /* Hacemos un set para guardar los datos del usuario, podriamos pasar mas
   parametros para guardar mas informacion */
   firebase

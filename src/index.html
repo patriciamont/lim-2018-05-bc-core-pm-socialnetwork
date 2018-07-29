@@ -12,42 +12,42 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
         integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <!-- Estilo para esta pagina -->
     <link rel="stylesheet" href="css/form.css">
 </head>
 
 <body>
 
-    <form class="form-signin">
+    <form class="form-signin" id="form">
 
         <div class="text-center">
-            <img src="img/logo.png" class="img-fluid mb-5 mt-5" style="width: 250px;" alt="AVATAR">
+            <img src="img/logo.png" class="img-fluid mb-4 mt-5" style="width: 250px;" alt="AVATAR">
         </div>
 
         <div class="form-group">
             <label for="email" class="bmd-label-floating">Correo Electronico</label>
-            <input type="email" class="form-control" id="email">
+            <input type="email" class="form-control" id="email" autofocus required>
         </div>
-
 
         <div class="form-group">
             <label for="password" class="bmd-label-floating">Contraseña</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" id="password" required>
         </div>
 
         <div class="mt-4">
-            <button id="btnSignin" class="btn btn-block btn-primary">
+            <button type="submit" id="btnSignin" class="btn btn-block btn-primary">
                 Iniciar sesión
             </button>
         </div>
+
 
         <div class="text-center mt-2" style="font-size: 12px;">
             <span>¿No tienes una cuenta?</span>
             <a href="register.html">Regístrate aquí</a>
         </div>
 
-        <hr class="hr-how"/>
+        <hr class="hr-how" />
 
         <div class="login-links">
             <span id="btnFacebook">

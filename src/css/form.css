@@ -58,7 +58,7 @@ body {
 .hr-how:after {
   background: #f5f5f5;
   color: #719099;
-  content: "O ingresa con";
+  content: 'O ingresa con';
   display: inline-block;
   font-size: 0.8em;
   padding: 0 0.4em;
