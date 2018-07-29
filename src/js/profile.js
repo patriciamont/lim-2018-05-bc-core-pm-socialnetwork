@@ -122,7 +122,7 @@ btnToPost.addEventListener('click', () => {
 
 
   })
-
+/*Llamando a al botón para que ejecute la función de botón like */
   btnLike.addEventListener('click', (e) => {
     e.preventDefault;
     var currentStatus = e.target.getAttribute('data-like') //0

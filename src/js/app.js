@@ -142,7 +142,6 @@ window.logout = () => {
 
 //FUNCIÓN PARA mostrar post
 
-//FUNCIÓN para dar like
 
 //FUNCIÓN para cambiar privacidad de post 
 
