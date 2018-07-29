@@ -1,6 +1,7 @@
 //*********AQUÍ SE ALMANECERAN LAS FUNCIONES GENERALES *********/
 
-//APRENDIENDO a crear callbacks
+//FUNCIÓN que te conecta al perfil
+
 
 //FUNCIÓN registro con usuario y contraseña
 window.register = (email, password, callback) => {
@@ -17,17 +18,31 @@ window.register = (email, password, callback) => {
         alert('Correo invalido');
       }
 
-      //Si el error es que la contraseña es muy debil mostramos un alert
+      //Si el error es que la contraseña es muy débil mostramos un alert
       if (error.code === 'auth/weak-password') {
         alert('contraseña no valida debe contener al menos 6 caracteres');
       }
 
-      //Si el email ya esta siendo usado tambien mostramos un alert
+      //Si el email ya esta siendo usado también mostramos un alert
       if (error.code === 'auth/email-already-in-use') {
         alert('El email ya esta en uso');
       }
     });
 };
+
+//FUNCIÓN ingresar con usuario y contraseña creado
+window.signIn = (email, password) => {
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(function () {
+      window.location = 'profile.html'
+      console.log('usuario registrado inició sesión')
+    })
+    .catch(function (error) {
+      console.log(error.code, error.message)
+    })
+}
 
 //FUNCIÓN que guarda de datos generales del usuario
 const writeUserData = (userId, name, email, imageUrl) => {
@@ -48,35 +63,21 @@ const writeUserData = (userId, name, email, imageUrl) => {
     });
 };
 
-//FUNCIÓN ingresar con usuario y contraseña creado
-window.signIn = (email, password) => {
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(function(data) {
-      console.log(data);
-      // Cuando el inicio de sesion sea exitoso lo mandamos al profile.html
-      location.href = 'profile.html';
-    })
-    .catch(function(error) {
-      console.log(error);
-      // No existe el usuario y la contraseña
-      alert('No existe el usuario y la contraseña');
-    });
-};
-
 //FUNCIÓN loguearse con google
-window.signGoogle = () => {
+window.signGoogle = callback => {
   var provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({
+    display: 'popup'
+  });
   firebase
     .auth()
     .signInWithPopup(provider)
     .then(function(result) {
-      window.location.href = 'profile.html';
       console.log('Sesión con google');
-      var user = result.user;
+      callback(result);
+      /* var user = result.user; */
       console.log(user);
-      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+      /* writeUserData(user.uid, user.displayName, user.email, user.photoURL); */
     })
     .catch(function(error) {
       // Handle Errors here.
@@ -116,12 +117,50 @@ window.signFacebook = callback => {
     });
 };
 
+//FUNCIÓN que cierra sesión
+window.logout = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log('Cerro Sesión')
+      window.location ='index.html'
+
+
+    })
+    .catch((error) => {
+      console.log('Error al cerrar Sesión')
+    })
+}
+
 //FUNCIÓN que crea nuevo post
+/* window.writeNewPost = (uid, body) => {
+  // A post entry.
+  var postData = {
+    uid: uid,
+    body: body
+  }
+} */
 
 //FUNCIÓN para editar post
 
 //FUNCIÓN para elimar post
 
+
+
 //FUNCIÓN PARA mostrar post
 
-//
+//FUNCIÓN para dar like
+window.like = () => {
+  var currentStatus = e.target.getAttribute('data-like') //0
+    if (currentStatus === '0') {
+      e.target.nextElementSibling.innerHTML = `${1} Te gusta`
+      e.target.setAttribute('data-like', '1')
+    } else {
+      e.target.nextElementSibling.innerHTML = ''
+      e.target.setAttribute('data-like', '0')
+    }
+  }
+//FUNCIÓN para cambiar privacidad de post 
+
+//FUNCIÓN para agregar amigos

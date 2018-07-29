@@ -7,21 +7,25 @@ const btnSignin = document.getElementById('btnSignin')
 const btnFacebook = document.getElementById('btnFacebook')
 const btnGoogle = document.getElementById('btnGoogle')
 
-btnSignin.addEventListener('click', (event) => {
-  event.preventDefault(); // Prevenimos el refreso de pagina al darle al boton
+
+
+btnSignin.addEventListener('click', () => {
+  event.preventDefault()
   signIn(email.value, password.value)
 })
 
 btnFacebook.addEventListener('click', () => {
   const callback = result => {
-    /* location.href = 'profile.html' */
     let user = result.user
     writeUserData(user.uid, user.displayName, user.email, user.photoURL)
-    /* window.location = 'profile.html' */
   }
   signFacebook(callback)
 })
 
 btnGoogle.addEventListener('click', () => {
-  signGoogle()
+  const callback = result => {
+    let user = result.user
+    writeUserData(user.uid, user.displayName, user.email, user.photoURL)
+  }
+  signGoogle(callback)
 })
