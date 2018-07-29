@@ -133,14 +133,6 @@ window.logout = () => {
     })
 }
 
-//FUNCIÓN que crea nuevo post
-/* window.writeNewPost = (uid, body) => {
-  // A post entry.
-  var postData = {
-    uid: uid,
-    body: body
-  }
-} */
 
 //FUNCIÓN para editar post
 
@@ -150,17 +142,7 @@ window.logout = () => {
 
 //FUNCIÓN PARA mostrar post
 
-//FUNCIÓN para dar like
-window.like = () => {
-  var currentStatus = e.target.getAttribute('data-like') //0
-    if (currentStatus === '0') {
-      e.target.nextElementSibling.innerHTML = `${1} Te gusta`
-      e.target.setAttribute('data-like', '1')
-    } else {
-      e.target.nextElementSibling.innerHTML = ''
-      e.target.setAttribute('data-like', '0')
-    }
-  }
+
 //FUNCIÓN para cambiar privacidad de post 
 
 //FUNCIÓN para agregar amigos

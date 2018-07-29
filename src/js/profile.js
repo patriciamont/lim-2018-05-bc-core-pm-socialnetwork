@@ -62,7 +62,7 @@ function writeUserData(userId, name, email, imageUrl) {
     profile_picture: imageUrl
   });
 };
-
+*/
 
 
 
@@ -122,10 +122,17 @@ btnToPost.addEventListener('click', () => {
 
 
   })
-
+/*Llamando a al botón para que ejecute la función de botón like */
   btnLike.addEventListener('click', (e) => {
     e.preventDefault;
-    like()
+    var currentStatus = e.target.getAttribute('data-like') //0
+    if (currentStatus === '0') {
+      e.target.nextElementSibling.innerHTML = `${1} Te gusta`
+      e.target.setAttribute('data-like', '1')
+    } else {
+      e.target.nextElementSibling.innerHTML = ''
+      e.target.setAttribute('data-like', '0')
+    }
   })
 
 
@@ -141,28 +148,6 @@ btnToPost.addEventListener('click', () => {
 })
 
 
-
-/* register.addEventListener('click', () =>{
-  firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
-    .then(function () {
-      console.log('Se creo el usuario')
-    })
-    .catch(function (error) {
-      console.log(error.code, error.message)
-    });
-  })
- */
-
-/*btnSignin.addEventListener('click', () => {
-  firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-  .then(function (){
-    console.log('Inició Sesión');
-  })
-  .catch(function(error) {
-    console.log('Contraseña incorrecta');
-  });
-})*/
-
 btnLogout.addEventListener('click', () => {
   firebase.auth().signOut().then(function () {
     console.log('Cerro Sesión');
@@ -170,40 +155,6 @@ btnLogout.addEventListener('click', () => {
     console.log('Error al cerrar Sesión');
   });
 })
-/* btnGoogle.addEventListener('click', () => {
-  var provider = new firebase.auth.GoogleAuthProvider();
-    
-    provider.setCustomParameters({
-      'display' : 'popup'
-    });
-  firebase.auth().signInWithPopup(provider).then(function(result){
-    
-    console.log('Inicio sesión con google')
-    var user = result.user;
-    writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-  }).catch(function(error){
-    console.log(error.code);
-    console.log(error.message);
-    console.log(error.email);
-    console.log(error.credential);
-    
-  });
-}) */
-
-/* btnFb.addEventListener('click', () => {
-  var provider = new firebase.auth.FacebookAuthProvider();
-  provider.setCustomParameters({
-    'display': 'popup'
-  });
-  firebase.auth().signInWithPopup(provider)
-  .then(function (result) { console.log('Inicio sesión con facebook')
-  }).catch(function (error) {
-    console.log(error.code);
-    console.log(error.message);
-    console.log(error.email);
-    console.log(error.credential);
-  });
-}); */
 
 function reload_page() {
   window.location.reload();
