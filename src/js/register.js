@@ -2,7 +2,6 @@
 
 //VARIABLES
 
-/* const btnRegister = document.getElementById('register'); */
 const btnFacebook = document.getElementById('btnFacebook');
 const btnGoogle = document.getElementById('btnGoogle');
 const form = document.getElementById('form');
