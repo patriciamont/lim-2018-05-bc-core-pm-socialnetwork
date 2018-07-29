@@ -1,8 +1,5 @@
 //*********AQUÍ SE ALMANECERAN LAS FUNCIONES GENERALES *********/
 
-//FUNCIÓN que te conecta al perfil
-
-
 //FUNCIÓN registro con usuario y contraseña
 window.register = (email, password, callback) => {
   return firebase
@@ -133,16 +130,89 @@ window.logout = () => {
     })
 }
 
+// FUNCION para crear post
+const writeNewPost = (uid, body, private) => {
+  // Creamos un objeto donde guardaremos los datos del post
+  const postData = {
+    uid: uid,
+    body: body,
+    likes: 0,
+    private: private,
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  };
+
+  //Obtenemos una llave para el nuevo post
+  const newPostKey = firebase
+    .database()
+    .ref()
+    .child('users-posts')
+    .push().key;
+
+  let updates = {};
+  updates['/posts/' + newPostKey] = postData;
+  updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+  firebase
+    .database()
+    .ref()
+    .update(updates);
+  return newPostKey;
+};
+
 
 //FUNCIÓN para editar post
 
+const editPost = (text, userId, keyPost) => {
+  firebase
+    .database()
+    .ref('user-posts/' + userId + '/' + keyPost)
+    .update({
+      body: text
+    });
+
+  firebase
+    .database()
+    .ref('posts/' + keyPost)
+    .update({
+      body: text
+    });
+}
 //FUNCIÓN para elimar post
 
+const deletePost = (userId, keyPost) => {
 
+  firebase
+      .database()
+      .ref()
+      .child('/user-posts/' + userId + '/' + keyPost)
+      .remove();
+    firebase
+      .database()
+      .ref()
+      .child('posts/' + keyPost)
+      .remove();
+}
+
+//FUNCION para dar Like a los post
+
+const likePost = (userId, keyPost) => {
+  firebase
+    .database()
+    .ref('user-posts/' + userId + '/' + keyPost)
+    .update({
+      likes: 1,
+    });
+
+  firebase
+    .database()
+    .ref('posts/' + keyPost)
+    .update({
+      likes: 1,
+    });
+}
 
 //FUNCIÓN PARA mostrar post
 
-
-//FUNCIÓN para cambiar privacidad de post 
+//FUNCIÓN para cambiar privacidad de post
 
 //FUNCIÓN para agregar amigos
