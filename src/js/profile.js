@@ -4,6 +4,7 @@
 const btnLogout = document.getElementById('btnlogout');
 const bd = document.getElementById('bd');
 const btnToPost = document.getElementById('btnSave');
+const inputPrivacy = document.getElementById('inputPrivacy');
 // Post es el texto que escribo
 const post = document.getElementById('post');
 // Posts es el ID donde pongo todos mis post
@@ -12,31 +13,33 @@ var userName = document.getElementById('user-name');
 var userImage = document.getElementById('user-pic');
 var emailUser = document.getElementById('emailUser');
 
-//User Id
-
-let UserId;
-
-//Función para mostrar posts
+// Cargamos los post publicos de TODOS los usuarios (ultimos 50)
 let loadPosts = () => {
-  myUserId = firebase.auth().currentUser.uid;
+  userdata = firebase.auth().currentUser.uid;
 
-  /* Obtenemos la data de todos los post dentro de la base de datos*/
-
-  firebase
-    .database()
-    .ref('user-posts/' + myUserId)
-    .once('value')
-    .then(snapshot => {
+  //Cargamos todos los Post que cotengan el valor public como FALSO
+  ref = firebase.database().ref('posts');
+  ref
+    .orderByChild('private')
+    .equalTo(false)
+    .once('value', snapshot => {
       let userpost = snapshot.val();
-
-      // Iteramos en la data y vamos creando los post
 
       for (let post in userpost) {
         //Cargamos el contenido de cada post
         body = userpost[post]['body'];
+        uid = userpost[post]['uid'];
+        console.log(userpost)
+        name = userpost[post]['name']
         idPost = post;
 
-        createPost(body, idPost);
+        // Si el id del usuario no coincide con el UID del post
+        // Ejecutamos la funcion createPost con el parametro FALSE
+        if (userdata === uid) {
+          createPost(body, idPost, name, true);
+        } else{
+          createPost(body, idPost, name, false);
+        }
       }
     });
 };
@@ -50,7 +53,6 @@ window.onload = () => {
       var displayName = user.displayName;
       var userPhoto = user.photoURL;
       var emailU = user.email;
-      UserId = user.uid;
 
       userName.textContent = displayName;
       userImage = user.photoURL;
@@ -62,36 +64,74 @@ window.onload = () => {
       console.log('No esta logueado');
     }
   });
-
-  
 };
 
-const createPost = (body, idPost) => {
+const createPost = (body, idPost, username, private) => {
   //Obtenemos el Id del usuario actual.
-  var myUserId = firebase.auth().currentUser.uid;
+  let userdata = firebase.auth().currentUser;
   let postKey = idPost;
+  //Obtenemos si se ha seleccionado publico o privado
 
-/*   Al no tener ID el post supongo que es un post nuevo
+  /*   Al no tener ID el post supongo que es un post nuevo
   Lo pasamos por la función "writeNewPost" para poder
   Crearle un ID y escribir sus datos */
   if (postKey === undefined) {
-    postKey = writeNewPost(myUserId, post.value, false);
+    postKey = writeNewPost(userdata.uid, post.value, userdata.displayName ,inputPrivacy.selectedIndex);
   }
 
   // Div que contendrá mi post
   const contPost = document.createElement('div');
+  //DIV para el nombre
+  const divName = document.createElement('div')
   const textPost = document.createElement('textarea');
+  divName.setAttribute('id', 'postname')
+  divName.innerHTML = username
+  textPost.setAttribute('id', postKey);
+  textPost.disabled = true;
+  textPost.innerHTML = body;
+  
+  contPost.appendChild(divName)
+  contPost.appendChild(textPost);
 
-  // Botón para actualizar el post
-  const btnUpdate = document.createElement('input');
-  btnUpdate.setAttribute('id', 'Cod-' + postKey);
-  btnUpdate.setAttribute('value', 'Editar');
-  btnUpdate.setAttribute('type', 'button');
+  // Nos aseguramos que el post sea nuestro si es asi
+  // creamos los botoenes para editarlo y borrarlo
+  if (private) {
+    // Botón para actualizar el post
+    const btnUpdate = document.createElement('input');
+    btnUpdate.setAttribute('id', 'Cod-' + postKey);
+    btnUpdate.setAttribute('value', 'Editar');
+    btnUpdate.setAttribute('type', 'button');
+    contPost.appendChild(btnUpdate); // APPEND
 
-  // Boton para borrar el post
-  const btnDelete = document.createElement('input');
-  btnDelete.setAttribute('value', 'Eliminar');
-  btnDelete.setAttribute('type', 'button');
+    // Botón para borrar el post
+    const btnDelete = document.createElement('input');
+    btnDelete.setAttribute('value', 'Eliminar');
+    btnDelete.setAttribute('type', 'button');
+    contPost.appendChild(btnDelete); // APPEND
+
+    //Como el post es nuestro, agregamos las funcionalidades
+    // de borrar y editar.
+
+    btnUpdate.addEventListener('click', () => {
+      textPost.disabled = !textPost.disabled;
+  
+      if (textPost.disabled) {
+        btnUpdate.value = 'Editar';
+      } else {
+        btnUpdate.value = 'Guardar';
+      }
+  
+      editPost(textPost.value, userdata.uid, postKey);
+    });
+  
+    btnDelete.addEventListener('click', () => {
+      //Ejecutamos la funcion para eliminar el post
+      //Le pasamos el Id del usuario y el ID del post a eliminar
+      deletePost(userdata.uid, postKey);
+      // Con este while eliminamos el div del post eliminado.
+      while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+    });
+  }
 
   const btnLike = document.createElement('input');
   const showLikes = document.createElement('p');
@@ -99,56 +139,31 @@ const createPost = (body, idPost) => {
   btnLike.setAttribute('type', 'button');
   btnLike.setAttribute('data-like', '0');
   showLikes.setAttribute('id', 'clicks');
+  contPost.appendChild(btnLike); // APPEND
+  contPost.appendChild(showLikes); // APPEND
 
   //Llamando a al botón para que ejecute la función de botón like
   btnLike.addEventListener('click', e => {
     e.preventDefault;
-    likePost(myUserId, postKey);
-         var currentStatus = e.target.getAttribute('data-like'); //0
+    likePost(userdata.uid, postKey);
+    var currentStatus = e.target.getAttribute('data-like'); //0
     if (currentStatus === '0') {
       e.target.nextElementSibling.innerHTML = `${1} Te gusta`;
       e.target.setAttribute('data-like', '1');
     } else {
       e.target.nextElementSibling.innerHTML = '';
       e.target.setAttribute('data-like', '0');
-    } 
+    }
   });
-
-  textPost.setAttribute('id', postKey);
-  textPost.disabled = true;
-  textPost.innerHTML = body;
 
   //Hacemos los append para encadenar los botones y los div
-  contPost.appendChild(textPost);
-  contPost.appendChild(btnUpdate);
-  contPost.appendChild(btnDelete);
-  contPost.appendChild(btnLike);
-  contPost.appendChild(showLikes);
   posts.appendChild(contPost);
-
-  btnUpdate.addEventListener('click', () => {
-    textPost.disabled = !textPost.disabled;
-
-    if (textPost.disabled) {
-      btnUpdate.value = 'Editar';
-    } else {
-      btnUpdate.value = 'Guardar';
-    }
-
-    editPost(textPost.value, myUserId, postKey);
-  });
-
-  btnDelete.addEventListener('click', () => {
-    //Ejecutamos la funcion para eliminar el post
-    //Le pasamos el Id del usuario y el ID del post a eliminar
-    deletePost(myUserId, postKey);
-    // Con este while eliminamos el div del post eliminado.
-    while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
-  });
 };
 
+//BOTON PARA CUANDO DAMOS PUBLICAR
 btnToPost.addEventListener('click', () => {
-  createPost(post.value);
+  let userdata = firebase.auth().currentUser;
+  createPost(post.value, undefined, userdata.displayName, true);
 });
 
 btnLogout.addEventListener('click', () => {

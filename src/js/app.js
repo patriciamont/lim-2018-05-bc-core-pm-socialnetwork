@@ -1,13 +1,19 @@
 //*********AQUÍ SE ALMANECERAN LAS FUNCIONES GENERALES *********/
 
 //FUNCIÓN registro con usuario y contraseña
-window.register = (email, password, callback) => {
+window.register = (email, name, password, callback) => {
   return firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(function(result) {
-      console.log('Usuario creado al autentificador', result);
-      callback(result); // Ejecutamos la funcion callback
+      user = firebase.auth().currentUser;
+      user
+        .updateProfile({
+          displayName: name
+        })
+        .then(() => {
+          callback(result); // Ejecutamos la funcion callback
+        });
     })
     .catch(function(error) {
       //Si el error es que el correo no es valido mostramos un alert
@@ -128,13 +134,21 @@ window.logout = () => {
 };
 
 // FUNCION para crear post
-const writeNewPost = (uid, body, private) => {
+const writeNewPost = (uid, body, name, private) => {
+  // Nos aseguramos de la privacidad del post
+  let value = false;
+
+  if (private == 1) {
+    value = true;
+  }
+
   // Creamos un objeto donde guardaremos los datos del post
   const postData = {
+    name: name,
     uid: uid,
     body: body,
     likes: {},
-    private: private,
+    private: value,
     timestamp: firebase.database.ServerValue.TIMESTAMP
   };
 
@@ -209,7 +223,6 @@ const likePost = (userId, keyPost) => {
       }
     });
 };
-
 
 //FUNCIÓN para cambiar privacidad de post
 
