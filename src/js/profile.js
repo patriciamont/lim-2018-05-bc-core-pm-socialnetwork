@@ -7,7 +7,7 @@ const btnToPost = document.getElementById('btnSave')
 const post = document.getElementById('post')
 const posts = document.getElementById('posts')
 var userName = document.getElementById('user-name')
-var userImage = document.getElementById('user-pic')
+var userImage = document.getElementById('user-image')
 var emailUser = document.getElementById('emailUser')
 
 function writeNewPost(uid, body) {
