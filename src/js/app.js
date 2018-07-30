@@ -1,192 +1,229 @@
-//*********AQUÍ SE ALMANECERAN LAS FUNCIONES DE profile.index *********/
+//*********AQUÍ SE ALMANECERAN LAS FUNCIONES GENERALES *********/
 
-const login = document.getElementById('login');
-const logout = document.getElementById('logout');
-const user_name = document.getElementById('user_name');
-const btnLogout = document.getElementById("btnLogout");
-const btnSignin = document.getElementById("btnSignin");
-const register = document.getElementById("register");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const btnGoogle = document.getElementById('btnGoogle');
-const btnFb = document.getElementById('btnFb');
-const bd = document.getElementById('bd');
-const btnSave = document.getElementById('btnSave');
-const post = document.getElementById('post');
-const posts = document.getElementById('posts');
+//FUNCIÓN registro con usuario y contraseña
+window.register = (email, name, password, callback) => {
+  return firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(function(result) {
+      user = firebase.auth().currentUser;
+      user
+        .updateProfile({
+          displayName: name
+        })
+        .then(() => {
+          callback(result); // Ejecutamos la funcion callback
+        });
+    })
+    .catch(function(error) {
+      //Si el error es que el correo no es valido mostramos un alert
+      if (error.code === 'auth/invalid-email') {
+        alert('Correo invalido');
+      }
 
+      //Si el error es que la contraseña es muy débil mostramos un alert
+      if (error.code === 'auth/weak-password') {
+        alert('contraseña no valida debe contener al menos 6 caracteres');
+      }
 
-window.onload = () => {
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      console.log('User is signed in.');
-      login.classList.add("hiden");
-      bd.classList.remove("hiden");
-      posts.classList.remove("hiden");
-      logout.classList.remove("hiden");
-      user_name.innerHTML = `Bienvenida ${user.displayName}`;
-    } else {
-      
-      console.log('No esta logueado');
-      login.classList.remove("hiden");
-      logout.classList.add("hiden");
-      posts.classList.add("hiden");
-      bd.classList.add("hiden")
-    }
+      //Si el email ya esta siendo usado también mostramos un alert
+      if (error.code === 'auth/email-already-in-use') {
+        alert('El email ya esta en uso');
+      }
+    });
+};
+
+//FUNCIÓN ingresar con usuario y contraseña creado
+window.signIn = (email, password) => {
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(function() {
+      location.href = 'profile.html';
+    })
+    .catch(function(error) {
+      alert('Correo o contraseña invalida');
+    });
+};
+
+//FUNCIÓN que guarda de datos generales del usuario
+const writeUserData = (userId, name, email, imageUrl) => {
+  /* Hacemos un set para guardar los datos del usuario, podriamos pasar mas
+  parametros para guardar mas informacion */
+  firebase
+    .database()
+    .ref('users/' + userId)
+    .set({
+      username: name,
+      email: email,
+      profile_picture: imageUrl
+    })
+    .then(function(data) {
+      /* Con el then esperamos a que estos datos sean guardados antes
+      de redirrecionar a la siguiente pagina */
+      location.href = 'profile.html';
+    });
+};
+
+//FUNCIÓN loguearse con google
+window.signGoogle = callback => {
+  var provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({
+    display: 'popup'
+  });
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then(function(result) {
+      console.log('Sesión con google');
+      callback(result);
+      /* var user = result.user; */
+      console.log(user);
+      /* writeUserData(user.uid, user.displayName, user.email, user.photoURL); */
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      console.log(error.code);
+      console.log(error.message);
+      // The email of the user's account used.
+      console.log(error.email);
+      // The firebase.auth.AuthCredential type that was used.
+      console.log(error.credential);
+      // ...
+    });
+};
+
+//FUNCIÓN loguease con facebook
+window.signFacebook = callback => {
+  var provider = new firebase.auth.FacebookAuthProvider();
+  provider.setCustomParameters({
+    display: 'popup'
   });
 
-}
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then(function(result) {
+      console.log('Logueado con Fb');
+      callback(result);
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      console.log(error.code);
+      console.log(error.message);
+      // The email of the user's account used.
+      console.log(error.email);
+      // The firebase.auth.AuthCredential type that was used.
+      console.log(error.credential);
+      // ...
+    });
+};
 
+//FUNCIÓN que cierra sesión
+window.logout = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log('Cerro Sesión');
+      window.location = 'index.html';
+    })
+    .catch(error => {
+      console.log('Error al cerrar Sesión');
+    });
+};
 
-function writeUserData(userId, name, email, imageUrl) {
-  firebase.database().ref('users/' + userId).set({
-    username: name,
-    email: email,
-    profile_picture: imageUrl
-  });
-}
+// FUNCION para crear post
+const writeNewPost = (uid, body, name, private) => {
+  // Nos aseguramos de la privacidad del post
+  let value = false;
 
+  if (private == 1) {
+    value = true;
+  }
 
-function writeNewPost(uid, body) {
-  // A post entry.
-  var postData = {
+  // Creamos un objeto donde guardaremos los datos del post
+  const postData = {
+    name: name,
     uid: uid,
     body: body,
+    likes: {},
+    private: value,
+    timestamp: firebase.database.ServerValue.TIMESTAMP
   };
 
-  // Get a key for a new Post.
-  var newPostKey = firebase.database().ref().child('posts').push().key;
+  //Obtenemos una llave para el nuevo post
+  const newPostKey = firebase
+    .database()
+    .ref()
+    .child('users-posts')
+    .push().key;
 
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  var updates = {};
+  let updates = {};
   updates['/posts/' + newPostKey] = postData;
   updates['/user-posts/' + uid + '/' + newPostKey] = postData;
 
-  firebase.database().ref().update(updates);
+  firebase
+    .database()
+    .ref()
+    .update(updates);
   return newPostKey;
-}
+};
 
-btnSave.addEventListener('click', () => {
-  var userId = firebase.auth().currentUser.uid;
-  const newPost = writeNewPost(userId, post.value);
+//FUNCIÓN para editar post
 
-
-  var btnUpdate = document.createElement("input");
-  btnUpdate.setAttribute("value", "Update");
-  btnUpdate.setAttribute("type", "button");
-  var btnDelete = document.createElement("input");
-  btnDelete.setAttribute("value", "Delete");
-  btnDelete.setAttribute("type", "button");
-  var contPost = document.createElement('div');
-  var textPost = document.createElement('textarea')
-  textPost.setAttribute("id", newPost);
-
-  textPost.innerHTML = post.value;
-
-  btnDelete.addEventListener('click', () => {
-
-    firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
-    firebase.database().ref().child('posts/' + newPost).remove();
-
-    while (posts.firstChild) posts.removeChild(posts.firstChild);
-
-    alert('The user is deleted successfully!');
-    reload_page();
-
-  });
-
-  btnUpdate.addEventListener('click', () => {
-    const newUpdate = document.getElementById(newPost);
-    const nuevoPost = {
-      body: newUpdate.value,
-    };
-
-    var updatesUser = {};
-    var updatesPost = {};
-
-    updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost;
-    updatesPost['/posts/' + newPost] = nuevoPost;
-
-    firebase.database().ref().update(updatesUser);
-    firebase.database().ref().update(updatesPost);
-
-  });
-
-  contPost.appendChild(textPost);
-  contPost.appendChild(btnUpdate);
-  contPost.appendChild(btnDelete);
-  posts.appendChild(contPost);
-})
-
-
-
-register.addEventListener('click', () =>{
-  firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
-    .then(function () {
-      console.log('Se creo el usuario')
-    })
-    .catch(function (error) {
-      console.log(error.code, error.message)
+const editPost = (text, userId, keyPost) => {
+  firebase
+    .database()
+    .ref('user-posts/' + userId + '/' + keyPost)
+    .update({
+      body: text
     });
-  })
 
-
-/*btnSignin.addEventListener('click', () => {
-  firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-  .then(function (){
-    console.log('Inició Sesión');
-  })
-  .catch(function(error) {
-    console.log('Contraseña incorrecta');
-  });
-})*/
-
-btnLogout.addEventListener('click', () => {
-  firebase.auth().signOut().then(function() {
-    console.log('Cerro Sesión');
-  }).catch(function(error) {
-    console.log('Error al cerrar Sesión');
-  });
-})
-btnGoogle.addEventListener('click', () => {
-  var provider = new firebase.auth.GoogleAuthProvider();
-    
-    provider.setCustomParameters({
-      'display' : 'popup'
+  firebase
+    .database()
+    .ref('posts/' + keyPost)
+    .update({
+      body: text
     });
-  firebase.auth().signInWithPopup(provider).then(function(result){
-    
-    console.log('Inicio sesión con google')
-    var user = result.user;
-    writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+};
+//FUNCIÓN para elimar post
 
-  }).catch(function(error){
-    console.log(error.code);
-    console.log(error.message);
-    console.log(error.email);
-    console.log(error.credential);
-    
+const deletePost = (userId, keyPost) => {
+  firebase
+    .database()
+    .ref()
+    .child('/user-posts/' + userId + '/' + keyPost)
+    .remove();
+  firebase
+    .database()
+    .ref()
+    .child('posts/' + keyPost)
+    .remove();
+};
 
-  });
-})
+//FUNCIÓN para dar Like a los post
 
-btnFb.addEventListener('click', () => {
-  var provider = new firebase.auth.FacebookAuthProvider();
+const likePost = (userId, keyPost) => {
+  firebase
+    .database()
+    .ref('user-posts/' + userId + '/' + keyPost)
+    .update({
+      likes: {
+        id: userId
+      }
+    });
 
-  provider.setCustomParameters({
-    'display': 'popup'
-  });
-  firebase.auth().signInWithPopup(provider)
-  .then(function (result) { console.log('Inicio sesión con facebook')
+  firebase
+    .database()
+    .ref('posts/' + keyPost)
+    .update({
+      likes: {
+        id: userId
+      }
+    });
+};
 
-  }).catch(function (error) {
-    console.log(error.code);
-    console.log(error.message);
-    console.log(error.email);
-    console.log(error.credential);
-  });
+//FUNCIÓN para cambiar privacidad de post
 
-});
-function reload_page() {
-  window.location.reload();
-}
+//FUNCIÓN para agregar amigos
