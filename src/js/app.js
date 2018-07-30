@@ -32,17 +32,16 @@ window.signIn = (email, password) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function () {
-      location.href = 'profile.html'
+    .then(function() {
+      location.href = 'profile.html';
     })
-    .catch(function (error) {
-      alert('Correo o contraseña invalida')
-    })
-}
+    .catch(function(error) {
+      alert('Correo o contraseña invalida');
+    });
+};
 
 //FUNCIÓN que guarda de datos generales del usuario
 const writeUserData = (userId, name, email, imageUrl) => {
-
   /* Hacemos un set para guardar los datos del usuario, podriamos pasar mas
   parametros para guardar mas informacion */
   firebase
@@ -120,15 +119,13 @@ window.logout = () => {
     .auth()
     .signOut()
     .then(() => {
-      console.log('Cerro Sesión')
-      window.location ='index.html'
-
-
+      console.log('Cerro Sesión');
+      window.location = 'index.html';
     })
-    .catch((error) => {
-      console.log('Error al cerrar Sesión')
-    })
-}
+    .catch(error => {
+      console.log('Error al cerrar Sesión');
+    });
+};
 
 // FUNCION para crear post
 const writeNewPost = (uid, body, private) => {
@@ -136,7 +133,7 @@ const writeNewPost = (uid, body, private) => {
   const postData = {
     uid: uid,
     body: body,
-    likes: 0,
+    likes: {},
     private: private,
     timestamp: firebase.database.ServerValue.TIMESTAMP
   };
@@ -159,7 +156,6 @@ const writeNewPost = (uid, body, private) => {
   return newPostKey;
 };
 
-
 //FUNCIÓN para editar post
 
 const editPost = (text, userId, keyPost) => {
@@ -176,42 +172,44 @@ const editPost = (text, userId, keyPost) => {
     .update({
       body: text
     });
-}
+};
 //FUNCIÓN para elimar post
 
 const deletePost = (userId, keyPost) => {
-
   firebase
-      .database()
-      .ref()
-      .child('/user-posts/' + userId + '/' + keyPost)
-      .remove();
-    firebase
-      .database()
-      .ref()
-      .child('posts/' + keyPost)
-      .remove();
-}
+    .database()
+    .ref()
+    .child('/user-posts/' + userId + '/' + keyPost)
+    .remove();
+  firebase
+    .database()
+    .ref()
+    .child('posts/' + keyPost)
+    .remove();
+};
 
-//FUNCION para dar Like a los post
+//FUNCIÓN para dar Like a los post
 
 const likePost = (userId, keyPost) => {
   firebase
     .database()
     .ref('user-posts/' + userId + '/' + keyPost)
     .update({
-      likes: 1,
+      likes: {
+        id: userId
+      }
     });
 
   firebase
     .database()
     .ref('posts/' + keyPost)
     .update({
-      likes: 1,
+      likes: {
+        id: userId
+      }
     });
-}
+};
 
-//FUNCIÓN PARA mostrar post
 
 //FUNCIÓN para cambiar privacidad de post
 
