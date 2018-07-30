@@ -104,14 +104,11 @@ Si deseas ver el video de la aplicación de esta técnica dale click [aquí](htt
 En esta sección presentamos el link y screenshots del prototipo en alta fidelidad. Las deciones de tipografía, color y otros se especificarán en el área de UI Design.
 
 
-![Imagen 1][1]  ![Imagen 2][2]
+![mobile](https://fotos.subefotos.com/19595a4d4d2aa92e635c5b1104dca05fo.jpg)
 
-[1]:https://fotos.subefotos.com/a8fe3f6dcb52f17ba988ecdae84afc0co.jpg
-[2]: https://fotos.subefotos.com/a8fe3f6dcb52f17ba988ecdae84afc0co.jpg
+![register](https://fotos.subefotos.com/3eb0da04b0d6e17ab3c486eec29da2d9o.jpg)
 
-![register](https://fotos.subefotos.com/30e2e93084e5a2f6fb079ed25aac7de3o.jpg)
-
-[Dale click a nuestro proyecto en Adobe XD](https://xd.adobe.com/view/78192a0c-b856-45c5-5a1f-2016ee8e2a82-0e28/)
+[Dale click a nuestro prototipo mobile completo en Adobe XD](https://xd.adobe.com/view/78192a0c-b856-45c5-5a1f-2016ee8e2a82-0e28/)
 
 #### Testing con prototipo
 En esta sección exponemos las conclusiones del testing del prototipo en alta fidelidad con usuarios:
@@ -122,6 +119,8 @@ En esta sección exponemos las conclusiones del testing del prototipo en alta fi
 
 #### Testing con producto HTML
 En esta sección exponemos las conclusiones del testing del prototipo en HTML con usuarios:
+
+Los usuarios mostraron confusión en la parte de confirmar contraseña ya que basta que escriban más de 6 caracteres para que se marque como correcto.
 
 ### **Técnicas**
 
@@ -173,7 +172,7 @@ Necesitas instalar:
 * Git Bash
 Luego, debes *clonar* este repositorio en tu equipo
 ```bash
-git clone https://github.com/Leydy/lim-2018-05-bc-core-pm-socialnetwork.git
+git clone https://github.com/DebbieVejarano/lim-2018-05-bc-core-pm-socialnetwork.git
 ```
 
 #### Instala dependencias
