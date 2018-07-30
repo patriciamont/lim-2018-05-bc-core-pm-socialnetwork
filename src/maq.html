@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 
-
-
 <!-- Estilo para esta pagina -->
 
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
@@ -14,8 +13,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Maquetación</title>
 </head>
@@ -24,18 +21,10 @@
 <body>
 
     <header>
-
-        <!-- div class="container"> -->
         <nav class="navbar navbar-expand navbar-light bg-light">
-
-
-            <!--  <div class="col-xs-6 col-sm-6 col-md-6"> -->
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Buscar">
-                <!-- <i class="fas fa-search"></i> -->
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
             </form>
-
-
             <div style="margin-left: 855px;">
                 <!-- navbar del bottom de arriba-->
                 <ul class="navbar-nav">
@@ -46,20 +35,12 @@
                         <a class="nav-link" href="#" style="color: black;">Noticias </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" id="btnlogout" class="nav-link" style="color: black;">Cerrar Sesión</a>
+                        <a href="#" class="nav-link"  id="btnlogout" style="color: black;">Cerrar Sesión</a>
                     </li>
                 </ul>
             </div>
-
-
-
         </nav>
-        <!-- </div> -->
-
-
-
     </header>
-
     <div class="container">
         <div class="row ">
             <div class="col-md-12" style="padding-top: 20px;">
@@ -97,41 +78,62 @@
             </div>
         </div>
     </div>
-
-
+    
+  <!--   <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">nikopoooooooooooooooooooooooooooo.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div> -->
 
      <div class="container">
-        <div id="bd" class="hiden">
-            <textarea class="textarea" name="Publicacòn" id="post" placeholder="¿Qué estás pensando?" cols="100" rows="5"></textarea>
-            <input type="button" value="Publicar" id="btnSave">
-            <div class="form-group col-md-3">
-                <select id="inputPrivacy" class="form-control">
-                    <option selected>Publico</option>
-                    <option>Privado</option>
-                </select>
+        <div class="row">
+            <div class="col-md-12" style="padding-top: 20px;">
+                <div class="card">
+                    <h5 class="card-title">Ideas</h5>
+                    <div class="row">
+                        <div class="col-md-6" style="padding: 20px 20px;">
+                            <textarea class="textarea" name="Publicacòn" id="post" placeholder="¿Qué estás pensando?"></textarea>
+                            <form>
+                                <input type="text" id="bottom" name="bottom" placeholder="¿Que estas pensando?">
+                                <input type="button" value="Publicar">
+                                <div class="col-md-6" style="margin-left: 890px;">
+                                    <a href="#">Publicar</a>
+                                    <a href="#">Another link</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-     </div>
+        </div> 
 
 
-    <div id="posts" class="hiden">
-        <h3>Mi muro</h3>
-    </div>
 
 
-    <!-- FIREBASE -->
-    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
-    <script src="js/firebase.js"></script>
 
-    <script src="js/app.js"></script>
-    <script src="js/profile.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+        <!-- FIREBASE -->
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+        <script src="js/firebase.js"></script>
+
+        <script src="js/app.js"></script>
+        <script src="js/profile.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+
+        <script src="js/jquery-3.2.1.slim.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 </body>
 <!-- CDN JQUERY, POPPER PARA BOOTSTRAP (MATERIAL DESIGN) -->
 
