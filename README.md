@@ -2,6 +2,7 @@
 
 > educadores compartiendo inspiración
 
+![logo marca](https://fotos.subefotos.com/4068d3c16f57c1179628a4318eeecff7o.png)
 ## Índice
 
 * **Valores y metodología ágil:** Exposición de los valores que nos definen como equipo y nuestra metodología de trabajo.
@@ -15,12 +16,12 @@
 * **Implementación:** Proposición de como acceder a este proyecto y los requerimientos de instalación.
 
 ***
-Prueba nuestro demo aquí: <colocar demo>
+Prueba nuestro demo aquí: https://debbievejarano.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/
 
 
 ## Valores y metodología ágil
 ![Cultura de equipo](https://fotos.subefotos.com/43cc21b3759d1d5f5c5848d74b3d61fdo.png)
-
+Si quieres conocer cómo nos organizamos da click [aquí](https://docs.google.com/presentation/d/1NfuowA-3M6RLQ_5MMKN0Awc30Ebli77BKj_sb-S_cQ8/edit?usp=sharing).
 ## UX design
 
 Revisa nuestro [informe completo de UX](https://docs.google.com/presentation/d/1hCN5ryDyvF5kQvmFy7EEwQj_liXk_Lu3uRkfPMDpUtw/edit?usp=sharing).
@@ -97,18 +98,17 @@ En esta sección presentamos el resumen de entrevistas con usuarios:
 ![Resumen entrevistas](https://fotos.subefotos.com/ea38025bf6ddcb5633bd4a15f127690eo.jpg)
 Para mayores detalles visita nuestro [informe UX](https://docs.google.com/presentation/d/1hCN5ryDyvF5kQvmFy7EEwQj_liXk_Lu3uRkfPMDpUtw/edit?usp=sharing).
 
+Si deseas ver el video de la aplicación de esta técnica dale click [aquí](https://photos.app.goo.gl/TW1FmP2EXhtvKLKQ7).
+
 #### Prototipos en alta fidelidad
 En esta sección presentamos el link y screenshots del prototipo en alta fidelidad. Las deciones de tipografía, color y otros se especificarán en el área de UI Design.
 
 
-![Imagen 1][1]  ![Imagen 2][2]
+![mobile](https://fotos.subefotos.com/19595a4d4d2aa92e635c5b1104dca05fo.jpg)
 
-[1]:https://fotos.subefotos.com/a8fe3f6dcb52f17ba988ecdae84afc0co.jpg
-[2]: https://fotos.subefotos.com/a8fe3f6dcb52f17ba988ecdae84afc0co.jpg
+![register](https://fotos.subefotos.com/3eb0da04b0d6e17ab3c486eec29da2d9o.jpg)
 
-![register](https://fotos.subefotos.com/30e2e93084e5a2f6fb079ed25aac7de3o.jpg)
-
-[Dale click a nuestro proyecto en Adobe XD](colocar link)
+[Dale click a nuestro prototipo mobile completo en Adobe XD](https://xd.adobe.com/view/78192a0c-b856-45c5-5a1f-2016ee8e2a82-0e28/)
 
 #### Testing con prototipo
 En esta sección exponemos las conclusiones del testing del prototipo en alta fidelidad con usuarios:
@@ -120,11 +120,13 @@ En esta sección exponemos las conclusiones del testing del prototipo en alta fi
 #### Testing con producto HTML
 En esta sección exponemos las conclusiones del testing del prototipo en HTML con usuarios:
 
+Los usuarios mostraron confusión en la parte de confirmar contraseña ya que basta que escriban más de 6 caracteres para que se marque como correcto.
+
 ### **Técnicas**
 
 Para la búsqueda de información
 
-- Brainstorning
+- Brainstorming
 - Benchmark
 
 Para el descubrimiento del perfil y necesidades del usuario
@@ -134,7 +136,7 @@ Para la arquitectura de la información
 - Card Sorting
 
 Para el diseño de interacción:
-- flowchart (Diagramas de flujo)
+- lucidchart (Diagramas de flujo)
 
 Para el diseño visual:
 - Sketch
@@ -170,7 +172,7 @@ Necesitas instalar:
 * Git Bash
 Luego, debes *clonar* este repositorio en tu equipo
 ```bash
-git clone https://github.com/Leydy/lim-2018-05-bc-core-pm-socialnetwork.git
+git clone https://github.com/DebbieVejarano/lim-2018-05-bc-core-pm-socialnetwork.git
 ```
 
 #### Instala dependencias
