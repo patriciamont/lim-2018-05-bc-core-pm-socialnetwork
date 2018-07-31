@@ -37,7 +37,7 @@ let loadPosts = () => {
         // Ejecutamos la funcion createPost con el parametro FALSE
         if (userdata === uid) {
           createPost(body, idPost, name, true);
-        } else{
+        } else {
           createPost(body, idPost, name, false);
         }
       }
@@ -45,7 +45,7 @@ let loadPosts = () => {
 };
 
 window.onload = () => {
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       console.log(user);
       console.log('User is signed in.');
@@ -76,7 +76,7 @@ const createPost = (body, idPost, username, private) => {
   Lo pasamos por la función "writeNewPost" para poder
   Crearle un ID y escribir sus datos */
   if (postKey === undefined) {
-    postKey = writeNewPost(userdata.uid, post.value, userdata.displayName ,inputPrivacy.selectedIndex);
+    postKey = writeNewPost(userdata.uid, post.value, userdata.displayName, inputPrivacy.selectedIndex);
   }
 
   // Div que contendrá mi post
@@ -125,16 +125,16 @@ const createPost = (body, idPost, username, private) => {
 
     btnUpdate.addEventListener('click', () => {
       textPost.disabled = !textPost.disabled;
-  
+
       if (textPost.disabled) {
         btnUpdate.value = 'Editar';
       } else {
         btnUpdate.value = 'Guardar';
       }
-  
+
       editPost(textPost.value, userdata.uid, postKey);
     });
-  
+
     btnDelete.addEventListener('click', () => {
       //Ejecutamos la funcion para eliminar el post
       //Le pasamos el Id del usuario y el ID del post a eliminar
@@ -183,10 +183,10 @@ btnLogout.addEventListener('click', () => {
   firebase
     .auth()
     .signOut()
-    .then(function() {
+    .then(function () {
       console.log('Cerro Sesión');
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log('Error al cerrar Sesión');
     });
 });
