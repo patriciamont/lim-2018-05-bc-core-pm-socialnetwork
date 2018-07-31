@@ -143,9 +143,9 @@ const createPost = (body, idPost, username, private) => {
       // Con este while eliminamos el div del post eliminado.
 
       swal({
-        title: "Está seguro que desea eliminar este post?",
-        text: "¡Ya no podrá recuperarlo!",
-/*         icon: "warning", */
+        title: "¿Seguro?",
+        text: "¡Ya no podrá recuperar esta publicación!",
+        /*         icon: "warning", */
         buttons: true,
         dangerMode: true,
       })
@@ -154,11 +154,11 @@ const createPost = (body, idPost, username, private) => {
           if (willDelete) {
             deletePost(userdata.uid, postKey);
             while (contPost.firstChild) contPost.removeChild(contPost.firstChild)
-            swal("Tu archivo ha sido eliminado!", {
+            swal("Tu publicación ha sido eliminada!", {
               icon: "success",
             });
           } else {
-            swal("Tu archivo está seguro");
+            swal("Tu publicación está segura");
           }
         });
 
