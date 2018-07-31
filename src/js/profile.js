@@ -124,7 +124,7 @@ const createPost = (body, idPost, username, private) => {
     // de borrar y editar.
 
     btnUpdate.addEventListener('click', () => {
-     
+
       textPost.disabled = !textPost.disabled;
 
       if (textPost.disabled) {
@@ -139,9 +139,29 @@ const createPost = (body, idPost, username, private) => {
     btnDelete.addEventListener('click', () => {
       //Ejecutamos la funcion para eliminar el post
       //Le pasamos el Id del usuario y el ID del post a eliminar
-      deletePost(userdata.uid, postKey);
+
       // Con este while eliminamos el div del post eliminado.
-      while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+
+      swal({
+        title: "Está seguro que desea eliminar este post?",
+        text: "¡Ya no podrá recuperarlo!",
+/*         icon: "warning", */
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          console.log(willDelete)
+          if (willDelete) {
+            deletePost(userdata.uid, postKey);
+            while (contPost.firstChild) contPost.removeChild(contPost.firstChild)
+            swal("Tu archivo ha sido eliminado!", {
+              icon: "success",
+            });
+          } else {
+            swal("Tu archivo está seguro");
+          }
+        });
+
     });
   }
 
