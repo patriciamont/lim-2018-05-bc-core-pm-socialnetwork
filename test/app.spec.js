@@ -1,3 +1,5 @@
+require('../src/js/app');
+
 describe('app', () => {
     describe('register', () => {
         it('es una funcion', () => {
