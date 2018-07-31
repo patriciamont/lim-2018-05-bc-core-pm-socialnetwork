@@ -89,7 +89,7 @@ const createPost = (body, idPost, username, private) => {
   //DIV para el nombre
   const divName = document.createElement('p')
   divName.className = 'card-title'
-  const textPost = document.createElement('p');
+  const textPost = document.createElement('textarea');
   textPost.className = 'card-text'
   divName.setAttribute('id', 'postname')
   divName.innerHTML = username
