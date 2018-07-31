@@ -1,16 +1,16 @@
 .sin{
         outline: none;
         background-color: #ffff;
-        border: 0;
+        border: 0;  
         
-    
-      }  
-textarea{
+      }
+
+      .card-text{
         resize: none;
         outline: none;
         background-color: #ffff;
         border: 0;
         overflow: auto;
         width: 100%;
-        
       }
+
