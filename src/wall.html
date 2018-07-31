@@ -15,10 +15,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <!-- Estilo para esta pagina -->
   <link rel="icon" type="image/jpg" href="resources/favicon.jpg" />
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/jpg" href="img/responsive.jpg" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-    crossorigin="anonymous">
 
   <!-- CDN JQUERY, POPPER PARA BOOTSTRAP (MATERIAL DESIGN) -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -33,11 +29,8 @@
 <body>
 
   <div class="container">
-    <!-- Menú de navegación  -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <img src="img/responsive.jpg" width="30" height="30">
-      <a class="navbar-brand" href="#">IDEAS</a>
-
+      <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -51,69 +44,53 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">PERFIL</a>
+            <a class="nav-link" href="#">PERFIL</a>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-              OPCIONES
+              Dropdown
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Configuración</a>
-              <a class="dropdown-item" href="#" id="btnlogout">Cerrar sesión</a>
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
             </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Buscar inspiración" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
     </nav>
+    <!-- <nav class="navbar navbar-light bg-light justify-content-between">
+      <a class="navbar-brand">MI Perfil</a>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <div class="dropdown">
+            <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="ex1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex1">
+              <button class="dropdown-item" type="button">Action</button>
+              <button class="dropdown-item disabled" type="button">Another action</button>
+              <button class="dropdown-item" type="button">Another action</button>
+            </div>
+          </div>
+      </form>
+    </nav> -->
   </div>
 
-  <!-- Opción de publicar post -->
-  <div class="container mt-5" id="bd">
-    <div class="card w-100">
-      <div class="card-body">
-        <!-- Acá va el nombre del usuario ,,,,checkear ese USER NAME-->
-        <h5 class="card-title" id="user-name">Card title</h5>
-        <p class="card-text" id="emailUser">mail</p>
-        <!-- <input type="text" class="sin" name="nombre" placeholder="¿Qué estás pensando?" id="post"> -->
-        <textarea id="post" class="sin" placeholder="¿Qué estás pensando?" cols="30" rows="10"></textarea>
-        <!-- <p class="card-text" id="post" contenteditable="true">¿Qué estás pensando?</p> -->
-        <!-- Acá se escribe el post del usuario -->
-        <div class="row">
-          <div class="col">
-            <a href="#" class="btn btn-primary" id="btnSave">PUBLICAR</a>
-            <!-- Boton que publica -->
-          </div>
-        </div>
-        <div class="col">
-          <!--     Botón que selecciona privacidad -->
-          <div class="form-group col-md-2">
-            <select class="form-control" id="inputPrivacy">
-              <option selected>Público</option>
-              <option>Privado</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="posts">
-
-    </div>
-
-  </div>
-
-
-
-
-  <!--   <div class="container mt-5">
+  <div class="container mt-5">
     <div id="bd" class="hiden">
-      <textarea class="textarea" name="Publicacion" id="post" placeholder="¿Qué estás pensando?" cols="100" rows="5"></textarea>
+      <textarea class="textarea" name="Publicacòn" id="post" placeholder="¿Qué estás pensando?" cols="100" rows="5"></textarea>
       <input type="button" value="Publicar" id="btnSave">
       <div class="form-group col-md-3">
         <select id="inputPrivacy" class="form-control">
@@ -125,7 +102,7 @@
 
     <div id="posts">
     </div>
-  </div> -->
+  </div>
 
 
   <!--  <div style="margin-left: 855px;">
