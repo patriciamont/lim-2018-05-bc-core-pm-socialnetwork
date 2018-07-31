@@ -113,6 +113,7 @@ const createPost = (body, idPost, username, private) => {
     // de borrar y editar.
 
     btnUpdate.addEventListener('click', () => {
+     
       textPost.disabled = !textPost.disabled;
   
       if (textPost.disabled) {
