@@ -115,7 +115,9 @@ En esta sección exponemos las conclusiones del testing del prototipo en alta fi
 
 > En el login, entendieron de qué iba la aplicación. Sin embargo, a algunos usuarios no les quedo claro que haya dos opciones con la palabra ingresa y además que exista la opción de registrarse con la indicación "usuario". Eso les hacia considerar la opción de solo colocar su nombre. Por ende, decidimos reforzar la marca con un _tagline_, incluir solo una opción de ingresa y reemplazar la palagra "usuario" por "correo electrónico".
 
+> En general, se comprendió. Por otro lado, se concluyó que en el perfil sería atractivo que los usuarios tengan la opción de implementar más información acerca de ellos. Con respecto a la sección de seguidos, resaltó la sugerencia de poder bloquear o escoger ver primero.
 
+A continuación agregamos el [link](https://drive.google.com/file/d/1sapW8kZ9OO95zdDHmBIhYduFYJ2CSlC5/view?usp=sharing) a una prueba con usuario.
 
 #### Testing con producto HTML
 En esta sección exponemos las conclusiones del testing del prototipo en HTML con usuarios:
@@ -131,9 +133,6 @@ Para la búsqueda de información
 
 Para el descubrimiento del perfil y necesidades del usuario
 - Entrevistas en profundidad
-
-Para la arquitectura de la información
-- Card Sorting
 
 Para el diseño de interacción:
 - lucidchart (Diagramas de flujo)

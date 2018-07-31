@@ -81,7 +81,7 @@ const createPost = (body, idPost, username, private) => {
 
   // Div que contendrá mi post
   const maxiPost = document.createElement('div');
-  maxiPost.className = '"container mt-10"'
+  maxiPost.className = '"container mt-2"'
   const cardPost = document.createElement('div');
   cardPost.className = 'card w-100'
   const contPost = document.createElement('div');
