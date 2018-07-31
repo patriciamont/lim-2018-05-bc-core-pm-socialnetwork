@@ -1,24 +1,9 @@
-
-
-.navbar {
-background: #57FFC7;
-}
-    
-     
-      .sin{
+.sin{
         outline: none;
         background-color: #ffff;
-        border: 0;
-        width: 100%;
-      }  
-/*       textarea{
-        resize: none;
-        outline: none;
-        background-color: #ffff;
-        border: 0;
-        overflow: auto;
-        width: 100%;
-      } */
+        border: 0;  
+        
+      }
 
       .card-text{
         resize: none;
@@ -28,3 +13,4 @@ background: #57FFC7;
         overflow: auto;
         width: 100%;
       }
+
