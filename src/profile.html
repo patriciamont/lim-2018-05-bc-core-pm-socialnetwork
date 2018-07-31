@@ -68,43 +68,42 @@
   </div>
 
   <!-- Opción de publicar post -->
-  <div class="container mt-5">
+  <div class="container mt-5" id="bd" >
     <div class="card w-100">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5> <!-- Acá va el nombre del usuario -->
-        <p class="card-text" id="post">With supporting text below as a natural lead-in to additional content.</p> <!-- Acá se escribe el post del usuario -->
-        <a href="#" class="btn btn-primary" id="btnSave">PUBLICAR</a> <!-- Boton que publica -->
+        <!-- Acá va el nombre del usuario ,,,,checkear ese USER NAME-->
+        <h5 class="card-title" id="user-name">Card title</h5>
+        <p class="card-text" id="emailUser">mail</p>
+        <p class="card-text" id="post">¿Qué estás pensando?</p>
+        <!-- Acá se escribe el post del usuario -->
+        <div class="row">
+          <div class="col">
+            <a href="#" class="btn btn-primary" id="btnSave">PUBLICAR</a>
+            <!-- Boton que publica -->
+          </div>
+        </div>
+        <div class="col">
+          <!--     Botón que selecciona privacidad -->
+          <div class="form-group col-md-2" >
+            <select class="form-control" id="inputPrivacy">
+              <option selected>Público</option>
+              <option>Privado</option>
+            </select>
+          </div>
+        </div>
       </div>
-
-      <!-- Botón select de privacidad -->
-      <select <!-- class="custom-select my-1 mr-sm-2" --> id="inlineFormCustomSelectPref">
-          <option selected>Público</option>
-          <option value="1">Privado</option>
-        </select>
-
-        
-      <!-- Otro -->
-      <select id="inputPrivacy" class="custom-select custom-select-sm">
-          <option selected>Público</option>
-          <option value="1">Privado</option>
-        </select>
-
-
-        <!--     Otro -->  
-        <select class="switch" id="exampleSelect1">
-            <option selected>Público</option>
-            <option>Privado</option>
-          </select>
     </div>
 
+    <div id="posts" > 
+
+      </div>
+
+  </div>
 
 
-</div>
 
 
-
-
-  <div class="container mt-5">
+<!--   <div class="container mt-5">
     <div id="bd" class="hiden">
       <textarea class="textarea" name="Publicacion" id="post" placeholder="¿Qué estás pensando?" cols="100" rows="5"></textarea>
       <input type="button" value="Publicar" id="btnSave">
@@ -118,7 +117,7 @@
 
     <div id="posts">
     </div>
-  </div>
+  </div> -->
 
 
   <!--  <div style="margin-left: 855px;">
