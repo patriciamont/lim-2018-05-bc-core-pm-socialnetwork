@@ -147,7 +147,7 @@ const createPost = (body, idPost, username, private) => {
   const btnLike = document.createElement('input');
   btnLike.className = 'btn btn-primary'
   const showLikes = document.createElement('p');
-  btnLike.setAttribute('value', 'Like');
+  btnLike.setAttribute('value', 'Me inspira');
   btnLike.setAttribute('type', 'button');
   btnLike.setAttribute('data-like', '0');
   showLikes.setAttribute('id', 'clicks');
@@ -160,7 +160,7 @@ const createPost = (body, idPost, username, private) => {
     likePost(userdata.uid, postKey);
     var currentStatus = e.target.getAttribute('data-like'); //0
     if (currentStatus === '0') {
-      e.target.nextElementSibling.innerHTML = `${1} Te gusta`;
+      e.target.nextElementSibling.innerHTML = `${1} Te inspira`;
       e.target.setAttribute('data-like', '1');
     } else {
       e.target.nextElementSibling.innerHTML = '';
