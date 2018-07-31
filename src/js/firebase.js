@@ -7,4 +7,5 @@
     storageBucket: "mi-proyecto-red.appspot.com",
     messagingSenderId: "327837950688"
   };
-  firebase.initializeApp(config);
+  firebase.initializeApp(config); 
+
