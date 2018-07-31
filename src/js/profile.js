@@ -115,6 +115,7 @@ const createPost = (body, idPost, username, private) => {
 
     // Botón para borrar el post
     const btnDelete = document.createElement('input');
+    btnDelete.className = 'btn btn-primary'
     btnDelete.setAttribute('value', 'Eliminar');
     btnDelete.setAttribute('type', 'button');
     contPost.appendChild(btnDelete); // APPEND
@@ -144,6 +145,7 @@ const createPost = (body, idPost, username, private) => {
   }
 
   const btnLike = document.createElement('input');
+  btnLike.className = 'btn btn-primary'
   const showLikes = document.createElement('p');
   btnLike.setAttribute('value', 'Like');
   btnLike.setAttribute('type', 'button');
