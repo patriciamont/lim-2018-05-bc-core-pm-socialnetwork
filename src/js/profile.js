@@ -89,7 +89,7 @@ const createPost = (body, idPost, username, private) => {
   //DIV para el nombre
   const divName = document.createElement('p')
   divName.className = 'card-title'
-  const textPost = document.createElement('p');
+  const textPost = document.createElement('textarea');
   textPost.className = 'card-text'
   divName.setAttribute('id', 'postname')
   divName.innerHTML = username
@@ -176,6 +176,7 @@ const createPost = (body, idPost, username, private) => {
 btnToPost.addEventListener('click', () => {
   let userdata = firebase.auth().currentUser;
   createPost(post.value, undefined, userdata.displayName, true);
+  reload_page()
 });
 
 btnLogout.addEventListener('click', () => {

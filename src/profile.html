@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <!-- Estilo para esta pagina -->
   <link rel="icon" type="image/jpg" href="resources/favicon.jpg" />
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/jpg" href="img/responsive.jpg" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
   <!-- CDN JQUERY, POPPER PARA BOOTSTRAP (MATERIAL DESIGN) -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -31,7 +34,9 @@
   <div class="container">
     <!-- Menú de navegación  -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img src="img/responsive.jpg" width="30" height="30">
       <a class="navbar-brand" href="#">IDEAS</a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -68,13 +73,15 @@
   </div>
 
   <!-- Opción de publicar post -->
-  <div class="container mt-5" id="bd" >
+  <div class="container mt-5" id="bd">
     <div class="card w-100">
       <div class="card-body">
         <!-- Acá va el nombre del usuario ,,,,checkear ese USER NAME-->
         <h5 class="card-title" id="user-name">Card title</h5>
         <p class="card-text" id="emailUser">mail</p>
-        <p class="card-text" id="post">¿Qué estás pensando?</p>
+        <!-- <input type="text" class="sin" name="nombre" placeholder="¿Qué estás pensando?" id="post"> -->
+        <textarea id="post" class="sin" placeholder="¿Qué estás pensando?" cols="30" rows="10"></textarea>
+        <!-- <p class="card-text" id="post" contenteditable="true">¿Qué estás pensando?</p> -->
         <!-- Acá se escribe el post del usuario -->
         <div class="row">
           <div class="col">
@@ -84,7 +91,7 @@
         </div>
         <div class="col">
           <!--     Botón que selecciona privacidad -->
-          <div class="form-group col-md-2" >
+          <div class="form-group col-md-2">
             <select class="form-control" id="inputPrivacy">
               <option selected>Público</option>
               <option>Privado</option>
@@ -94,16 +101,16 @@
       </div>
     </div>
 
-    <div id="posts" > 
+    <div id="posts">
 
-      </div>
+    </div>
 
   </div>
 
 
 
 
-<!--   <div class="container mt-5">
+  <!--   <div class="container mt-5">
     <div id="bd" class="hiden">
       <textarea class="textarea" name="Publicacion" id="post" placeholder="¿Qué estás pensando?" cols="100" rows="5"></textarea>
       <input type="button" value="Publicar" id="btnSave">
