@@ -37,7 +37,7 @@ let loadPosts = () => {
         // Ejecutamos la funcion createPost con el parametro FALSE
         if (userdata === uid) {
           createPost(body, idPost, name, true);
-        } else{
+        } else {
           createPost(body, idPost, name, false);
         }
       }
@@ -45,7 +45,7 @@ let loadPosts = () => {
 };
 
 window.onload = () => {
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       console.log(user);
       console.log('User is signed in.');
@@ -76,21 +76,30 @@ const createPost = (body, idPost, username, private) => {
   Lo pasamos por la función "writeNewPost" para poder
   Crearle un ID y escribir sus datos */
   if (postKey === undefined) {
-    postKey = writeNewPost(userdata.uid, post.value, userdata.displayName ,inputPrivacy.selectedIndex);
+    postKey = writeNewPost(userdata.uid, post.value, userdata.displayName, inputPrivacy.selectedIndex);
   }
 
   // Div que contendrá mi post
+  const maxiPost = document.createElement('div');
+  maxiPost.className = '"container mt-10"'
+  const cardPost = document.createElement('div');
+  cardPost.className = 'card w-100'
   const contPost = document.createElement('div');
+  contPost.className = 'card-body'
   //DIV para el nombre
-  const divName = document.createElement('div')
+  const divName = document.createElement('p')
+  divName.className = 'card-title'
   const textPost = document.createElement('textarea');
+  textPost.className = 'card-text'
   divName.setAttribute('id', 'postname')
   divName.innerHTML = username
   textPost.setAttribute('id', postKey);
   textPost.disabled = true;
   textPost.innerHTML = body;
-  
-  contPost.appendChild(divName)
+
+  maxiPost.appendChild(cardPost);
+  cardPost.appendChild(contPost);
+  contPost.appendChild(divName);
   contPost.appendChild(textPost);
 
   // Nos aseguramos que el post sea nuestro si es asi
@@ -98,6 +107,7 @@ const createPost = (body, idPost, username, private) => {
   if (private) {
     // Botón para actualizar el post
     const btnUpdate = document.createElement('input');
+    btnUpdate.className = 'btn btn-primary'
     btnUpdate.setAttribute('id', 'Cod-' + postKey);
     btnUpdate.setAttribute('value', 'Editar');
     btnUpdate.setAttribute('type', 'button');
@@ -105,6 +115,7 @@ const createPost = (body, idPost, username, private) => {
 
     // Botón para borrar el post
     const btnDelete = document.createElement('input');
+    btnDelete.className = 'btn btn-primary'
     btnDelete.setAttribute('value', 'Eliminar');
     btnDelete.setAttribute('type', 'button');
     contPost.appendChild(btnDelete); // APPEND
@@ -115,16 +126,16 @@ const createPost = (body, idPost, username, private) => {
     btnUpdate.addEventListener('click', () => {
      
       textPost.disabled = !textPost.disabled;
-  
+
       if (textPost.disabled) {
         btnUpdate.value = 'Editar';
       } else {
         btnUpdate.value = 'Guardar';
       }
-  
+
       editPost(textPost.value, userdata.uid, postKey);
     });
-  
+
     btnDelete.addEventListener('click', () => {
       //Ejecutamos la funcion para eliminar el post
       //Le pasamos el Id del usuario y el ID del post a eliminar
@@ -135,8 +146,9 @@ const createPost = (body, idPost, username, private) => {
   }
 
   const btnLike = document.createElement('input');
+  btnLike.className = 'btn btn-primary'
   const showLikes = document.createElement('p');
-  btnLike.setAttribute('value', 'Like');
+  btnLike.setAttribute('value', 'Me inspira');
   btnLike.setAttribute('type', 'button');
   btnLike.setAttribute('data-like', '0');
   showLikes.setAttribute('id', 'clicks');
@@ -149,7 +161,7 @@ const createPost = (body, idPost, username, private) => {
     likePost(userdata.uid, postKey);
     var currentStatus = e.target.getAttribute('data-like'); //0
     if (currentStatus === '0') {
-      e.target.nextElementSibling.innerHTML = `${1} Te gusta`;
+      e.target.nextElementSibling.innerHTML = `${1} Te inspira`;
       e.target.setAttribute('data-like', '1');
     } else {
       e.target.nextElementSibling.innerHTML = '';
@@ -158,23 +170,24 @@ const createPost = (body, idPost, username, private) => {
   });
 
   //Hacemos los append para encadenar los botones y los div
-  posts.appendChild(contPost);
+  posts.appendChild(maxiPost);
 };
 
 //BOTON PARA CUANDO DAMOS PUBLICAR
 btnToPost.addEventListener('click', () => {
   let userdata = firebase.auth().currentUser;
   createPost(post.value, undefined, userdata.displayName, true);
+  reload_page()
 });
 
 btnLogout.addEventListener('click', () => {
   firebase
     .auth()
     .signOut()
-    .then(function() {
+    .then(function () {
       console.log('Cerro Sesión');
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log('Error al cerrar Sesión');
     });
 });

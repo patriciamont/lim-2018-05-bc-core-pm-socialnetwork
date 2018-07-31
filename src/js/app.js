@@ -5,7 +5,7 @@ window.register = (email, name, password, callback) => {
   return firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(function(result) {
+    .then(function (result) {
       user = firebase.auth().currentUser;
       user
         .updateProfile({
@@ -15,7 +15,7 @@ window.register = (email, name, password, callback) => {
           callback(result); // Ejecutamos la funcion callback
         });
     })
-    .catch(function(error) {
+    .catch(function (error) {
       //Si el error es que el correo no es valido mostramos un alert
       if (error.code === 'auth/invalid-email') {
         alert('Correo invalido');
@@ -38,10 +38,10 @@ window.signIn = (email, password) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function() {
+    .then(function () {
       location.href = 'profile.html';
     })
-    .catch(function(error) {
+    .catch(function (error) {
       alert('Correo o contraseña invalida');
     });
 };
@@ -58,7 +58,7 @@ const writeUserData = (userId, name, email, imageUrl) => {
       email: email,
       profile_picture: imageUrl
     })
-    .then(function(data) {
+    .then(function (data) {
       /* Con el then esperamos a que estos datos sean guardados antes
       de redirrecionar a la siguiente pagina */
       location.href = 'profile.html';
@@ -74,14 +74,14 @@ window.signGoogle = callback => {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function(result) {
+    .then(function (result) {
       console.log('Sesión con google');
       callback(result);
       /* var user = result.user; */
       console.log(user);
       /* writeUserData(user.uid, user.displayName, user.email, user.photoURL); */
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // Handle Errors here.
       console.log(error.code);
       console.log(error.message);
@@ -103,11 +103,11 @@ window.signFacebook = callback => {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function(result) {
+    .then(function (result) {
       console.log('Logueado con Fb');
       callback(result);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // Handle Errors here.
       console.log(error.code);
       console.log(error.message);
