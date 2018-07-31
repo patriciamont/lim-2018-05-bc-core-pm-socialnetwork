@@ -176,6 +176,7 @@ const createPost = (body, idPost, username, private) => {
 btnToPost.addEventListener('click', () => {
   let userdata = firebase.auth().currentUser;
   createPost(post.value, undefined, userdata.displayName, true);
+  reload_page()
 });
 
 btnLogout.addEventListener('click', () => {
