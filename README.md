@@ -122,7 +122,11 @@ A continuación agregamos el [link](https://drive.google.com/file/d/1sapW8kZ9OO9
 #### Testing con producto HTML
 En esta sección exponemos las conclusiones del testing del prototipo en HTML con usuarios:
 
-Los usuarios mostraron confusión en la parte de confirmar contraseña ya que basta que escriban más de 6 caracteres para que se marque como correcto.
+En el login, los usuarios mostraron confusión en la parte de confirmar contraseña ya que basta con que escriban más de 6 caracteres para que se marque como correcto. Además, no todos lograron observar la opción de registrase a primera vista.
+
+Por otra parte, confirmaron que sería más atractivo que en el panel de noticias hubiese la opción de colocar fotos y comentar publicaciones.
+
+Finalmente, al inicio se pudo entender que era una app para docentes; sin embargo ya en sesión se perdio un poco el objetivo de la red social.
 
 ### **Técnicas**
 
