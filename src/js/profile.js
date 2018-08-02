@@ -19,26 +19,30 @@ let loadPosts = () => {
 
   //Cargamos todos los Post que cotengan el valor public como FALSO
   ref = firebase.database().ref('posts');
+
   ref
     .orderByChild('private')
-    .equalTo(false)
     .once('value', snapshot => {
       let userpost = snapshot.val();
-
+      console.log(userdata)
+      console.log(userpost)
       for (let post in userpost) {
         //Cargamos el contenido de cada post
         body = userpost[post]['body'];
         uid = userpost[post]['uid'];
-        console.log(userpost)
         name = userpost[post]['name']
+        private = userpost[post]['private']
         idPost = post;
+
 
         // Si el id del usuario no coincide con el UID del post
         // Ejecutamos la funcion createPost con el parametro FALSE
         if (userdata === uid) {
           createPost(body, idPost, name, true);
         } else {
-          createPost(body, idPost, name, false);
+          if(!private){
+            createPost(body, idPost, name, false);
+          }
         }
       }
     });
@@ -47,8 +51,8 @@ let loadPosts = () => {
 window.onload = () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      console.log(user);
-      console.log('User is signed in.');
+      /*       console.log(user);
+            console.log('User is signed in.'); */
 
       var displayName = user.displayName;
       var userPhoto = user.photoURL;
@@ -104,6 +108,7 @@ const createPost = (body, idPost, username, private) => {
 
   // Nos aseguramos que el post sea nuestro si es asi
   // creamos los botoenes para editarlo y borrarlo
+  console.log(private)
   if (private) {
     // Botón para actualizar el post
     const btnUpdate = document.createElement('input');
@@ -143,14 +148,14 @@ const createPost = (body, idPost, username, private) => {
       // Con este while eliminamos el div del post eliminado.
 
       swal({
-        title: "¿Seguro?",
-        text: "¡Ya no podrá recuperar esta publicación!",
-        /*         icon: "warning", */
-        buttons: true,
-        dangerMode: true,
-      })
+          title: "¿Seguro?",
+          text: "¡Ya no podrá recuperar esta publicación!",
+          /*         icon: "warning", */
+          buttons: true,
+          dangerMode: true,
+        })
         .then((willDelete) => {
-          console.log(willDelete)
+          /*           console.log(willDelete) */
           if (willDelete) {
             deletePost(userdata.uid, postKey);
             while (contPost.firstChild) contPost.removeChild(contPost.firstChild)
@@ -195,10 +200,10 @@ const createPost = (body, idPost, username, private) => {
 
 //BOTON PARA CUANDO DAMOS PUBLICAR
 btnToPost.addEventListener('click', () => {
-  if(post.value != ''){
+  if (post.value != '') {
     let userdata = firebase.auth().currentUser;
     createPost(post.value, undefined, userdata.displayName, true);
-    reload_page()
+    post.value = ''
   }
 });
 

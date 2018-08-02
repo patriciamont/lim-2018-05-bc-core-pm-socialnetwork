@@ -136,7 +136,7 @@ window.logout = () => {
 // FUNCION para crear post
 const writeNewPost = (uid, body, name, private) => {
   // Nos aseguramos de la privacidad del post
-  let value = false;
+ let value = false;
 
   if (private == 1) {
     value = true;
@@ -171,7 +171,6 @@ const writeNewPost = (uid, body, name, private) => {
 };
 
 //FUNCIÓN para editar post
-
 const editPost = (text, userId, keyPost) => {
   firebase
     .database()
