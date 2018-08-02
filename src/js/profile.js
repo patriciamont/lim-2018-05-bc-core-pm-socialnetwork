@@ -81,7 +81,7 @@ const createPost = (body, idPost, username, private) => {
 
   // Div que contendrá mi post
   const maxiPost = document.createElement('div');
-  maxiPost.className = '"container mt-10"'
+  maxiPost.className = '"container mt-2"'
   const cardPost = document.createElement('div');
   cardPost.className = 'card w-100'
   const contPost = document.createElement('div');
@@ -124,6 +124,7 @@ const createPost = (body, idPost, username, private) => {
     // de borrar y editar.
 
     btnUpdate.addEventListener('click', () => {
+
       textPost.disabled = !textPost.disabled;
 
       if (textPost.disabled) {
@@ -138,9 +139,29 @@ const createPost = (body, idPost, username, private) => {
     btnDelete.addEventListener('click', () => {
       //Ejecutamos la funcion para eliminar el post
       //Le pasamos el Id del usuario y el ID del post a eliminar
-      deletePost(userdata.uid, postKey);
+
       // Con este while eliminamos el div del post eliminado.
-      while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+
+      swal({
+        title: "¿Seguro?",
+        text: "¡Ya no podrá recuperar esta publicación!",
+        /*         icon: "warning", */
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          console.log(willDelete)
+          if (willDelete) {
+            deletePost(userdata.uid, postKey);
+            while (contPost.firstChild) contPost.removeChild(contPost.firstChild)
+            swal("Tu publicación ha sido eliminada!", {
+              icon: "success",
+            });
+          } else {
+            swal("Tu publicación está segura");
+          }
+        });
+
     });
   }
 
@@ -174,9 +195,11 @@ const createPost = (body, idPost, username, private) => {
 
 //BOTON PARA CUANDO DAMOS PUBLICAR
 btnToPost.addEventListener('click', () => {
-  let userdata = firebase.auth().currentUser;
-  createPost(post.value, undefined, userdata.displayName, true);
-  reload_page()
+  if(post.value != ''){
+    let userdata = firebase.auth().currentUser;
+    createPost(post.value, undefined, userdata.displayName, true);
+    reload_page()
+  }
 });
 
 btnLogout.addEventListener('click', () => {
