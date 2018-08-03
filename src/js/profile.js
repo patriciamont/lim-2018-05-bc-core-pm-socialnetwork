@@ -2,12 +2,11 @@
 
 //VARIABLES
 const btnLogout = document.getElementById('btnlogout');
-const bd = document.getElementById('bd');
 const btnToPost = document.getElementById('btnSave');
 const inputPrivacy = document.getElementById('inputPrivacy');
-// Post es el texto que escribo
+// Post es el texto que escribe el usuario
 const post = document.getElementById('post');
-// Posts es el ID donde pongo todos mis post
+// Posts es el ID donde el usuario pone todo su post
 const posts = document.getElementById('posts');
 var userName = document.getElementById('user-name');
 var userImage = document.getElementById('user-pic');
@@ -18,30 +17,34 @@ let loadPosts = () => {
   userdata = firebase.auth().currentUser.uid;
 
   //Cargamos todos los Post que cotengan el valor public como FALSO
-  ref = firebase.database().ref('posts');
+  firebase.database().ref('posts/-LIvd30ss3vVQ8MsTp7Y/likes').on('value', (val) => {
+    //console.log('aaaaaaaaaaaaaaaa', val.val())
+  });
+
+  ref = firebase.database().ref('posts')
 
   ref
     .orderByChild('private')
     .once('value', snapshot => {
       let userpost = snapshot.val();
-      console.log(userdata)
-      console.log(userpost)
+      //console.log(userdata)
+      //console.log(userpost)
       for (let post in userpost) {
         //Cargamos el contenido de cada post
         body = userpost[post]['body'];
         uid = userpost[post]['uid'];
         name = userpost[post]['name']
         private = userpost[post]['private']
+        likes = userpost[post]['likes']
         idPost = post;
-
 
         // Si el id del usuario no coincide con el UID del post
         // Ejecutamos la funcion createPost con el parametro FALSE
         if (userdata === uid) {
-          createPost(body, idPost, name, true);
+          createPost(body, idPost, name, true, likes);
         } else {
           if(!private){
-            createPost(body, idPost, name, false);
+            createPost(body, idPost, name, false, likes);
           }
         }
       }
@@ -51,18 +54,22 @@ let loadPosts = () => {
 window.onload = () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      /*       console.log(user);
-            console.log('User is signed in.'); */
+      /* firebase
+      .database()
+      .ref('users/' + user.uid)
+ */
+      console.log("Este es el id del usuario:", user.uid)
 
       var displayName = user.displayName;
       var userPhoto = user.photoURL;
       var emailU = user.email;
-
+      
       userName.textContent = displayName;
-      userImage = user.photoURL;
-      loadPosts();
-
       emailUser.textContent = emailU;
+      userImage = user.photoURL;
+      loadPosts()
+      
+      
     } else {
       window.location.href = 'index.html';
       console.log('No esta logueado');
@@ -70,7 +77,8 @@ window.onload = () => {
   });
 };
 
-const createPost = (body, idPost, username, private) => {
+const createPost = (body, idPost, username, private, likes) => {
+  //console.log(idPost, likes)
   //Obtenemos el Id del usuario actual.
   let userdata = firebase.auth().currentUser;
   let postKey = idPost;
@@ -85,7 +93,7 @@ const createPost = (body, idPost, username, private) => {
 
   // Div que contendrá mi post
   const maxiPost = document.createElement('div');
-  maxiPost.className = '"container mt-2"'
+  maxiPost.className = 'container mt-1'
   const cardPost = document.createElement('div');
   cardPost.className = 'card w-100'
   const contPost = document.createElement('div');
@@ -101,14 +109,24 @@ const createPost = (body, idPost, username, private) => {
   textPost.disabled = true;
   textPost.innerHTML = body;
 
+  const btnLike = document.createElement('input');
+  btnLike.className = 'btn btn-primary'
+  btnLike.setAttribute('value', 'Me inspira');
+  btnLike.setAttribute('type', 'button');
+  btnLike.setAttribute('data-like', likes);
+  const showLikes = document.createElement('p');
+  showLikes.setAttribute('id', 'clicks');
+  showLikes.innerHTML = likes + ' Me inspira';
+
   maxiPost.appendChild(cardPost);
   cardPost.appendChild(contPost);
   contPost.appendChild(divName);
   contPost.appendChild(textPost);
-
+  
+  //showLikes(likes, showLikes)
   // Nos aseguramos que el post sea nuestro si es asi
   // creamos los botoenes para editarlo y borrarlo
-  console.log(private)
+  //console.log(private)
   if (private) {
     // Botón para actualizar el post
     const btnUpdate = document.createElement('input');
@@ -124,6 +142,7 @@ const createPost = (body, idPost, username, private) => {
     btnDelete.setAttribute('value', 'Eliminar');
     btnDelete.setAttribute('type', 'button');
     contPost.appendChild(btnDelete); // APPEND
+
 
     //Como el post es nuestro, agregamos las funcionalidades
     // de borrar y editar.
@@ -170,33 +189,28 @@ const createPost = (body, idPost, username, private) => {
     });
   }
 
-  const btnLike = document.createElement('input');
-  btnLike.className = 'btn btn-primary'
-  const showLikes = document.createElement('p');
-  btnLike.setAttribute('value', 'Me inspira');
-  btnLike.setAttribute('type', 'button');
-  btnLike.setAttribute('data-like', '0');
-  showLikes.setAttribute('id', 'clicks');
+  
   contPost.appendChild(btnLike); // APPEND
   contPost.appendChild(showLikes); // APPEND
 
   //Llamando a al botón para que ejecute la función de botón like
   btnLike.addEventListener('click', e => {
     e.preventDefault;
-    likePost(userdata.uid, postKey);
-    var currentStatus = e.target.getAttribute('data-like'); //0
-    if (currentStatus === '0') {
-      e.target.nextElementSibling.innerHTML = `${1} Te inspira`;
-      e.target.setAttribute('data-like', '1');
-    } else {
-      e.target.nextElementSibling.innerHTML = '';
-      e.target.setAttribute('data-like', '0');
-    }
+    let currentLikes = parseInt(btnLike.getAttribute('data-like'));
+    console.log(currentLikes)
+    likePost(userdata.uid, postKey, currentLikes , showLikes);
   });
 
   //Hacemos los append para encadenar los botones y los div
   posts.appendChild(maxiPost);
 };
+
+const showLikes = (likes , container) => {
+  console.log(likes)
+  //contLikes = document.getElementById('clicks')
+  container.innerHTML = `${likes} Te inspira`;
+}
+
 
 //BOTON PARA CUANDO DAMOS PUBLICAR
 btnToPost.addEventListener('click', () => {
