@@ -5,7 +5,7 @@ window.register = (email, name, password, callback) => {
   return firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(function (result) {
+    .then( (result) => {
       user = firebase.auth().currentUser;
       user
         .updateProfile({
@@ -15,7 +15,7 @@ window.register = (email, name, password, callback) => {
           callback(result); // Ejecutamos la funcion callback
         });
     })
-    .catch(function (error) {
+    .catch((error) => {
       //Si el error es que el correo no es valido mostramos un alert
       if (error.code === 'auth/invalid-email') {
         alert('Correo invalido');
@@ -38,17 +38,20 @@ window.signIn = (email, password) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function () {
+    .then(() => {
       location.href = 'profile.html';
     })
-    .catch(function (error) {
+    .catch((error) => {
       alert('Correo o contraseña invalida');
     });
 };
 
 //FUNCIÓN que guarda de datos generales del usuario
 const writeUserData = (userId, name, email, imageUrl) => {
-  /* Hacemos un set para guardar los datos del usuario, podriamos pasar mas
+  /* 
+  
+  
+  Hacemos un set para guardar los datos del usuario, podriamos pasar mas
   parametros para guardar mas informacion */
   firebase
     .database()
@@ -58,7 +61,7 @@ const writeUserData = (userId, name, email, imageUrl) => {
       email: email,
       profile_picture: imageUrl
     })
-    .then(function (data) {
+    .then((data) => {
       /* Con el then esperamos a que estos datos sean guardados antes
       de redirrecionar a la siguiente pagina */
       location.href = 'profile.html';
@@ -74,14 +77,14 @@ window.signGoogle = callback => {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function (result) {
+    .then((result) => {
       console.log('Sesión con google');
       callback(result);
       /* var user = result.user; */
       console.log(user);
       /* writeUserData(user.uid, user.displayName, user.email, user.photoURL); */
     })
-    .catch(function (error) {
+    .catch((error) => {
       // Handle Errors here.
       console.log(error.code);
       console.log(error.message);
@@ -103,11 +106,11 @@ window.signFacebook = callback => {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function (result) {
+    .then((result)=> {
       console.log('Logueado con Fb');
       callback(result);
     })
-    .catch(function (error) {
+    .catch((error) => {
       // Handle Errors here.
       console.log(error.code);
       console.log(error.message);
@@ -147,7 +150,7 @@ const writeNewPost = (uid, body, name, private) => {
     name: name,
     uid: uid,
     body: body,
-    likes: {},
+    likes: [],
     private: value,
     timestamp: firebase.database.ServerValue.TIMESTAMP
   };
@@ -186,8 +189,8 @@ const editPost = (text, userId, keyPost) => {
       body: text
     });
 };
-//FUNCIÓN para elimar post
 
+//FUNCIÓN para elimar post
 const deletePost = (userId, keyPost) => {
   firebase
     .database()
@@ -202,26 +205,23 @@ const deletePost = (userId, keyPost) => {
 };
 
 //FUNCIÓN para dar Like a los post
-
-const likePost = (userId, keyPost) => {
+/* const likePost = (userId, keyPost, likes, container) => {
   firebase
     .database()
     .ref('user-posts/' + userId + '/' + keyPost)
     .update({
-      likes: {
-        id: userId
-      }
+      likes: newLikes
     });
 
   firebase
     .database()
     .ref('posts/' + keyPost)
     .update({
-      likes: {
-        id: userId
-      }
+      likes: newLikes 
     });
-};
+
+    showLikes(newLikes , container)
+}; */
 
 //FUNCIÓN para cambiar privacidad de post
 
