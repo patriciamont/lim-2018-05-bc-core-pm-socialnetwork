@@ -150,7 +150,7 @@ const writeNewPost = (uid, body, name, private) => {
     name: name,
     uid: uid,
     body: body,
-    likes: [],
+    starCount: 0,
     private: value,
     timestamp: firebase.database.ServerValue.TIMESTAMP
   };
@@ -188,8 +188,24 @@ const editPost = (text, userId, keyPost) => {
     .update({
       body: text
     });
-};
 
+};
+const likePost = (Like, userId, keyPost) => {
+  firebase
+    .database()
+    .ref('user-posts/' + userId + '/' + keyPost)
+    .update({
+      starCount: Like
+    });
+
+  firebase
+    .database()
+    .ref('posts/' + keyPost)
+    .update({
+      starCount: Like
+    });
+    
+};
 //FUNCIÓN para elimar post
 const deletePost = (userId, keyPost) => {
   firebase
@@ -205,23 +221,23 @@ const deletePost = (userId, keyPost) => {
 };
 
 //FUNCIÓN para dar Like a los post
-/* const likePost = (userId, keyPost, likes, container) => {
+const starPost = (userId, stars, starCount, container) => {
   firebase
-    .database()
+   .database()
     .ref('user-posts/' + userId + '/' + keyPost)
     .update({
-      likes: newLikes
+      stars: (starCount + 1)
     });
 
   firebase
     .database()
     .ref('posts/' + keyPost)
     .update({
-      likes: newLikes 
+      stars: (starCount + 1) 
     });
 
-    showLikes(newLikes , container)
-}; */
+    showLikes(stars , container)
+};
 
 //FUNCIÓN para cambiar privacidad de post
 
