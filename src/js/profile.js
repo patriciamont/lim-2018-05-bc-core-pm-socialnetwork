@@ -217,7 +217,7 @@ let starCount = 0;
 btnToPost.addEventListener('click', () => {
   if (post.value != '') {
     let userdata = firebase.auth().currentUser;
-    createPost(post.value, undefined, userdata.displayName, true, startCount);
+    createPost(post.value, undefined, userdata.displayName, true, starCount);
     post.value = ''
   }
 });
