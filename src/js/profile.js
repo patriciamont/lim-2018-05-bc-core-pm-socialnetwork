@@ -17,9 +17,10 @@ let loadPosts = () => {
   userdata = firebase.auth().currentUser.uid;
 
   //Cargamos todos los Post que cotengan el valor public como FALSO
-  firebase.database().ref('posts/-LIvd30ss3vVQ8MsTp7Y/likes').on('value', (val) => {
-    //console.log('aaaaaaaaaaaaaaaa', val.val())
-  });
+  // let starCountRef = firebase.database().ref('posts/' + postId + '/starCount');
+  // starCountRef.on('value', (snapshot) => {
+  //   updateStarCount(postElement, )
+  // });
 
   ref = firebase.database().ref('posts')
 
@@ -31,19 +32,19 @@ let loadPosts = () => {
       //console.log(userpost)
       for (let post in userpost) {
         //Cargamos el contenido de cada post
-        body = userpost[post]['body'];
-        uid = userpost[post]['uid'];
-        name = userpost[post]['name']
-        private = userpost[post]['private']
-        likes = userpost[post]['likes']
-        idPost = post;
+        let body = userpost[post]['body'];
+        let uid = userpost[post]['uid'];
+        let name = userpost[post]['name']
+        let private = userpost[post]['private']
+        let likes = userpost[post]['starCount']
+        let idPost = post;
 
         // Si el id del usuario no coincide con el UID del post
         // Ejecutamos la funcion createPost con el parametro FALSE
         if (userdata === uid) {
           createPost(body, idPost, name, true, likes);
         } else {
-          if(!private){
+          if (!private) {
             createPost(body, idPost, name, false, likes);
           }
         }
@@ -54,22 +55,18 @@ let loadPosts = () => {
 window.onload = () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      /* firebase
-      .database()
-      .ref('users/' + user.uid)
- */
       console.log("Este es el id del usuario:", user.uid)
 
       var displayName = user.displayName;
       var userPhoto = user.photoURL;
       var emailU = user.email;
-      
+
       userName.textContent = displayName;
       emailUser.textContent = emailU;
       userImage = user.photoURL;
       loadPosts()
-      
-      
+
+
     } else {
       window.location.href = 'index.html';
       console.log('No esta logueado');
@@ -111,18 +108,18 @@ const createPost = (body, idPost, username, private, likes) => {
 
   const btnLike = document.createElement('input');
   btnLike.className = 'btn btn-primary'
-  btnLike.setAttribute('value', 'Me inspira');
+  btnLike.setAttribute('value', 'Te inspira');
   btnLike.setAttribute('type', 'button');
   btnLike.setAttribute('data-like', likes);
   const showLikes = document.createElement('p');
   showLikes.setAttribute('id', 'clicks');
-  showLikes.innerHTML = likes + ' Me inspira';
+  showLikes.innerHTML = likes + ' Te inspira';
 
   maxiPost.appendChild(cardPost);
   cardPost.appendChild(contPost);
   contPost.appendChild(divName);
   contPost.appendChild(textPost);
-  
+
   //showLikes(likes, showLikes)
   // Nos aseguramos que el post sea nuestro si es asi
   // creamos los botoenes para editarlo y borrarlo
@@ -189,34 +186,64 @@ const createPost = (body, idPost, username, private, likes) => {
     });
   }
 
-  
+
   contPost.appendChild(btnLike); // APPEND
   contPost.appendChild(showLikes); // APPEND
+  let currentLikes = 0;
 
   //Llamando a al botón para que ejecute la función de botón like
   btnLike.addEventListener('click', e => {
-    e.preventDefault;
-    let currentLikes = parseInt(btnLike.getAttribute('data-like'));
+   
+    // currentLikes++;
+    // let currentLikes = parseInt(btnLike.getAttribute('data-like'));
     console.log(currentLikes)
-    likePost(userdata.uid, postKey, currentLikes , showLikes);
+    //  let count += currentLikes;
+
+    function likes(){ 
+      return firebase.database().ref('posts/' + postKey + '/userlikes' )
+      .once('value')
+    }
+    const result = likes();
+
+    result.then(resuelve)
+    function resuelve(snapshot){
+      currentLikes = Object.values(snapshot.val())
+      currentLikes.map(item => {
+        if(item == userdata.uid){
+
+          console.log("no cuneta")
+        }else{
+          console.log("anade")
+        }
+      })
+      console.log(Object.values(snapshot.val()))
+      
+    }
+  
+  console.log(result);
+  
+
+    likePost( currentLikes.length,userdata.uid, postKey);
+    textLikes(currentLikes,showLikes);
   });
 
   //Hacemos los append para encadenar los botones y los div
   posts.appendChild(maxiPost);
 };
 
-const showLikes = (likes , container) => {
+const textLikes = (likes, container) => {
   console.log(likes)
   //contLikes = document.getElementById('clicks')
   container.innerHTML = `${likes} Te inspira`;
 }
 
+let starCount = 0;
 
 //BOTON PARA CUANDO DAMOS PUBLICAR
 btnToPost.addEventListener('click', () => {
   if (post.value != '') {
     let userdata = firebase.auth().currentUser;
-    createPost(post.value, undefined, userdata.displayName, true);
+    createPost(post.value, undefined, userdata.displayName, true, starCount);
     post.value = ''
   }
 });
