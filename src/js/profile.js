@@ -42,10 +42,10 @@ let loadPosts = () => {
         // Si el id del usuario no coincide con el UID del post
         // Ejecutamos la funcion createPost con el parametro FALSE
         if (userdata === uid) {
-          createPost(body, idPost, name, true, likes);
+          createPost(body, idPost, name, true, likes, uid);
         } else {
           if (!private) {
-            createPost(body, idPost, name, false, likes);
+            createPost(body, idPost, name, false, likes, uid);
           }
         }
       }
@@ -74,7 +74,7 @@ window.onload = () => {
   });
 };
 
-const createPost = (body, idPost, username, private, likes) => {
+const createPost = (body, idPost, username, private, likes, uid) => {
   //console.log(idPost, likes)
   //Obtenemos el Id del usuario actual.
   let userdata = firebase.auth().currentUser;
@@ -189,7 +189,7 @@ const createPost = (body, idPost, username, private, likes) => {
 
   contPost.appendChild(btnLike); // APPEND
   contPost.appendChild(showLikes); // APPEND
-  let currentLikes = 0;
+  let currentLikes = likes;
 
   //Llamando a al botón para que ejecute la función de botón like
   btnLike.addEventListener('click', e => {
@@ -197,8 +197,8 @@ const createPost = (body, idPost, username, private, likes) => {
     // let currentLikes = parseInt(btnLike.getAttribute('data-like'));
     console.log(currentLikes)
     //  let count += currentLikes;
-    likePost( currentLikes,userdata.uid, postKey);
-    textLikes(currentLikes,showLikes);
+    likePost(currentLikes, uid, postKey);
+    textLikes(currentLikes, showLikes);
   });
 
   //Hacemos los append para encadenar los botones y los div
