@@ -193,7 +193,7 @@ const createPost = (body, idPost, username, private, likes, uid) => {
 
   //Llamando a al botón para que ejecute la función de botón like
   btnLike.addEventListener('click', e => {
-   
+   currentLikes++;
     // currentLikes++;
     // let currentLikes = parseInt(btnLike.getAttribute('data-like'));
     console.log(currentLikes)
